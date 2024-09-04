@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ch-de">
+<head>
+    <%- include("./snippets/head.ejs", {
+        title,
+        description,
+        origin,
+        url,
+        CONFIG
+    }) %>
+</head>
+<body>
+    <header>
+        <div class="logo-wrapper">
+            <a href="<%= CONFIG.origin %>" class="logo">
+                <img src="/img/logo.svg" alt="Logo" title="Logo">
+                <span><%- CONFIG.NAME_HTML %></span>
+            </a>
+        </div>
+        <div class="shortcuts">
+            <div class="contact">
+                <button type="button" class="primary-btn" title="Jetzt einen Termin finden">Jetzt kontaktieren</button>
+            </div>
+            <div class="phone">
+                <% let phone = CONFIG.PHONE;
+                if (phone.length === 10) {
+                    phone = phone.replace(/(\d{3})(\d{3})(\d{2})(\d{2})/, '$1 $2 $3 $4');
+                } else if (phone.length === 12) {
+                    phone = phone.replace(/(\d{2})(\d{2})(\d{3})(\d{2})(\d{2})/, '$1 $2 $3 $4 $5');
+                } %>
+                <a href="tel:<%= CONFIG.PHONE %>" class="phone-number" title="Rufen Sie gerne an."><%= phone %></a>
+            </div>
+            <div class="socials">
+                <a class="socials-link" href="<%= CONFIG.LINKS.FACEBOOK %>">
+                    <img src="/img/facebook.svg" alt="Facebook" title="Facebook" class="socials-icon">
+                </a>
+                <a class="socials-link" href="<%= CONFIG.LINKS.INSTAGRAM %>">
+                    <img src="/img/instagram.svg" alt="Instagram" title="Instagram" class="socials-icon">
+                </a>
+                <a class="socials-link" href="<%= CONFIG.LINKS.WHATSAPP %>">
+                    <img src="/img/whatsapp.svg" alt="WhatsApp" title="WhatsApp" class="socials-icon">
+                </a>
+            </div>
+        </div>
+    </header>
+</body>
+</html>

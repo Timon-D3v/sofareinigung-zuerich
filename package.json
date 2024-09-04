@@ -1,0 +1,29 @@
+{
+  "name": "sofareinigung-zuerich",
+  "version": "0.0.1",
+  "type": "module",
+  "description": "Dieses Repo enthält den Code für die Webseite sofareinigung-zuerich.ch",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gihub.com/Timon-D3v/sofareinigung-zuerich"
+  },
+  "author": "Timon Fiedler",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "timonjs": "^1.0.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}

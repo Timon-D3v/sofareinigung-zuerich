@@ -1,0 +1,1 @@
+getQuery("img").on("dragstart", () => false);
