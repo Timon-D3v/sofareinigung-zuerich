@@ -132,6 +132,8 @@ dist
 
 # Additional
 notes.txt
+TODO.txt
 Abrechnung.txt
 .vscode/
 .idea/
+.hintrc

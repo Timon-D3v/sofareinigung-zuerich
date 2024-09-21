@@ -8,40 +8,207 @@
         url,
         CONFIG
     }) %>
+    <script type="importmap">
+        {
+            "imports": {
+                "timonjs": "https://cdn.jsdelivr.net/npm/timonjs/dist/timon.module.min.mjs",
+                "three": "https://cdn.jsdelivr.net/npm/three/build/three.module.min.js",
+                "three/examples/jsm/": "https://cdn.jsdelivr.net/npm/three/examples/jsm/",
+                "gsap": "https://cdn.skypack.dev/gsap"
+            }
+        }
+    </script>
+    <script type="module" src="/js/scene.js" defer></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/cdn/shoelace-autoloader.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/cdn/themes/light.css">
 </head>
-<body>
-    <header>
-        <div class="logo-wrapper">
-            <a href="<%= CONFIG.origin %>" class="logo">
-                <img src="/img/logo.svg" alt="Logo" title="Logo">
-                <span><%- CONFIG.NAME_HTML %></span>
-            </a>
-        </div>
-        <div class="shortcuts">
-            <div class="contact">
-                <button type="button" class="primary-btn" title="Jetzt einen Termin finden">Jetzt kontaktieren</button>
+<body><% let phone = CONFIG.PHONE;
+    if (phone.length === 10) {
+        phone = phone.replace(/(\d{3})(\d{3})(\d{2})(\d{2})/, '$1 $2 $3 $4');
+    } else if (phone.length === 12) {
+        phone = phone.replace(/(\d{2})(\d{2})(\d{3})(\d{2})(\d{2})/, '$1 $2 $3 $4 $5');
+    } %>
+    <%- include("./snippets/header.ejs", {
+        CONFIG,
+        phone
+    }) %>
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Willkommen bei <span class="hero-special-text">Sofareinigung</span> Zürich</h1>
+                <p class="hero-text">Ihr Spezialist für <strong>Tiefenreinigung</strong> von <strong>Sofas</strong> und <strong>Polstern</strong> vor Ort</p>
+                <div class="hero-cta">
+                    <button type="button" class="secondary-btn scroll-to-explore" title="Mehr erfahren">Mehr Erfahren</button>
+                    <button type="button" class="primary-btn open-contact-form" title="Jetzt einen Termin finden">Jetzt kontaktieren</button>
+                </div>
             </div>
-            <div class="phone">
-                <% let phone = CONFIG.PHONE;
-                if (phone.length === 10) {
-                    phone = phone.replace(/(\d{3})(\d{3})(\d{2})(\d{2})/, '$1 $2 $3 $4');
-                } else if (phone.length === 12) {
-                    phone = phone.replace(/(\d{2})(\d{2})(\d{3})(\d{2})(\d{2})/, '$1 $2 $3 $4 $5');
+            <div class="hero-img-wrapper">
+                <img class="hero-img" src="/img/hero.svg" alt="Ein blaues Sofa" title="Ein blaues Sofa">
+            </div>
+        </section>
+        <svg class="divider" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none">
+            <defs>
+                <path id="divider-wave" d="M-160 44c30 0 58-18 88-18s58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path>
+            </defs>
+            <g>
+                <use xlink:href="#divider-wave" class="wave-path" x="50" y="6"></use>
+            </g>
+        </svg>
+        <section class="banner">
+            <div class="banner-info">
+                <img class="banner-img" src="/img/diamond.svg" alt="Ein Diamant" title="Qualität">
+                <div class="banner-content">
+                    <h2 class="banner-title">Qualität</h2>
+                    <p class="banner-text">Aussergewöhnliche Qualität</p>
+                </div>
+            </div>
+            <div class="banner-info">
+                <img class="banner-img" src="/img/basket.svg" alt="Ein Einkaufskorb" title="Angebot">
+                <div class="banner-content">
+                    <h2 class="banner-title">Angebot</h2>
+                    <p class="banner-text">Erhalten Sie ein unverbindliches Angebot</p>
+                </div>
+            </div>
+            <div class="banner-info">
+                <img class="banner-img" src="/img/leaf.svg" alt="Ein Blatt" title="Nachhaltigkeit">
+                <div class="banner-content">
+                    <h2 class="banner-title">Nachhaltigkeit</h2>
+                    <p class="banner-text">Reinigen statt neu kaufen</p>
+                </div>
+            </div>
+        </section>
+        <svg class="divider flipped" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none">
+            <defs>
+                <path id="divider-wave" d="M-160 44c30 0 58-18 88-18s58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path>
+            </defs>
+            <g>
+                <use xlink:href="#divider-wave" class="wave-path" x="50" y="6"></use>
+            </g>
+        </svg>
+        <section class="info" id="scrollTo___explore">
+            <h2 class="main-title">So funktioniert die Sofareinigung</h2>
+            <div class="info-wrapper">
+                <div class="info-video-wrapper">
+                    <video class="info-video">
+                        <source src="/videos/preview_360p.mp4" type="video/mp4" media="screen and (max-width:360px)">
+                        <source src="/videos/preview_720p.mp4" type="video/mp4" media="screen and (min-width:361px) and (max-width:720px)">
+                        <source src="/videos/preview_1080p.mp4" type="video/mp4" media="screen and (min-width:721px)">
+                        Ihr Browser unterstützt keine Videos.
+                    </video>
+                    <div class="info-video-play">
+                        <img class="info-video-play-icon" src="/img/play.svg" alt="Play" title="Play">
+                    </div>
+                </div>
+                <div class="info-content">
+                    <p class="info-text">
+                        Wir reinigen Ihr Sofa oder Polster vor Ort. Unsere Reinigungsmittel sind umweltfreundlich und schonend für Ihre Möbel. 
+                        Wir reinigen Ihr Sofa oder Polster gründlich und entfernen Flecken und Gerüche. 
+                        Nach der Reinigung ist Ihr Sofa oder Polster wieder wie neu.
+                    </p>
+                    <button type="button" class="primary-btn scroll-to-contact" title="Jetzt einen Termin finden">Interessiert?</button>
+                </div>
+            </div>
+        </section><% 
+        if (comments.length > 0) { %>
+        <section class="floating-reviews">
+            <div class="reviews-wrapper"><%
+                for (let i = 0; i < comments.length; i++) { 
+                %>
+                <%- include("./snippets/comments.ejs", comments[i]); %><% 
                 } %>
-                <a href="tel:<%= CONFIG.PHONE %>" class="phone-number" title="Rufen Sie gerne an."><%= phone %></a>
             </div>
-            <div class="socials">
-                <a class="socials-link" href="<%= CONFIG.LINKS.FACEBOOK %>">
-                    <img src="/img/facebook.svg" alt="Facebook" title="Facebook" class="socials-icon">
-                </a>
-                <a class="socials-link" href="<%= CONFIG.LINKS.INSTAGRAM %>">
-                    <img src="/img/instagram.svg" alt="Instagram" title="Instagram" class="socials-icon">
-                </a>
-                <a class="socials-link" href="<%= CONFIG.LINKS.WHATSAPP %>">
-                    <img src="/img/whatsapp.svg" alt="WhatsApp" title="WhatsApp" class="socials-icon">
-                </a>
+            <div class="reviews-wrapper"></div>
+            <button type="button" id="comments-open" class="primary-btn" title="Bewerte unseren Service">Deine Meinung zählt!</button>
+        </section><% 
+        } %>
+        <section class="compare-img">
+            <h1 class="main-title">Vorher - Nachher</h1>
+            <sl-carousel class="carousel" pagination navigation loop><%
+                for (let i = 0; i < compare.length; i++) { 
+                %>
+                <sl-carousel-item class="carousel-item">
+                    <sl-image-comparer position="50" handle="/img/blob.svg" class="image-comparer">
+                        <img slot="before" src="<%= compare[i][0] %>" alt="Vorher" class="compare-img">
+                        <img slot="after" src="<%= compare[i][1] %>" alt="Nachher" class="compare-img">
+                        <img slot="handle" src="/img/three-dots.svg" alt="Vergleichen" class="compare-handle">
+                    </sl-image-comparer>
+                </sl-carousel-item><% 
+                } %>
+            </sl-carousel>
+            <p class="compare-footer">Bilder sagen mehr als tausend Worte</p>
+        </section>
+        <section class="prefooter-wrapper" id="scrollTo___contact">
+            <h1 class="main-title">Kontaktieren Sie uns!</h1>
+            <div class="prefooter">
+                <div class="prefooter-call">
+                    <h2 class="prefooter-title">Anrufen</h2>
+                    <button type="button" class="primary-btn anim-scale" title="Rufen Sie gerne an."><%= phone %></button>
+                </div>
+                <div class="prefooter-playground">
+                    <canvas class="prefooter-canvas" id="scene"></canvas>
+                </div>
+                <div class="prefooter-write">
+                    <h2 class="prefooter-title">Schreiben</h2>
+                    <button type="button" class="secondary-btn anim-scale delay-1 open-contact-form" title="Jetzt einen Termin finden">Kontaktformular</button>
+                </div>
             </div>
+        </section>
+    </main>
+    <div class="preloader-container" style="display: none;">
+        <div class="preloader-boxes">
+            <div class="preloader-box"></div>
+            <div class="preloader-box"></div>
+            <div class="preloader-box"></div>
+            <div class="preloader-box"></div>
+            <div class="preloader-box"></div>
+            <div class="preloader-box"></div>
+            <div class="preloader-box"></div>
+            <div class="preloader-box"></div>
+            <div class="preloader-box"></div>
+            <div class="preloader-box"></div>
+            <div class="preloader-box"></div>
+            <div class="preloader-box"></div>
         </div>
-    </header>
+    </div>
+    <form id="contact">
+        <h1 class="main-title">Kontaktiere uns!</h1>
+        <div class="contact-name-wrapper">
+            <sl-input id="contact-name" class="contact-input" type="text" label="Vorname" autocomplete="given-name" required></sl-input>
+            <sl-input id="contact-family-name" class="contact-input" type="text" label="Nachname" autocomplete="family-name" required></sl-input>
+        </div>
+        <sl-input id="contact-email" class="contact-input" type="email" label="E-Mail Adresse" autocomplete="email" required></sl-input>
+        <sl-textarea id="contact-message" class="contact-input" label="Nachricht" required help-text="Lade bitte mindestens ein Bild hoch"></sl-textarea>
+        <label for="contact-file" class="contact-file-label contact-input" title="Bilder hochladen">
+            <img src="/img/upload.svg" alt="Bilder hochladen">
+            <input id="contact-file" class="visually-hidden" type="file" accept="image/*" multiple>
+        </label>
+        <div id="contact-files"></div>
+        <button id="contact-submit" type="button" class="primary-btn" title="Nachricht senden">Senden</button>
+        <button id="contact-close" type="button" class="close-btn" title="Schliessen">
+            <img src="/img/close.svg" alt="Ein X zum Schliessen">
+        </button>
+    </form>
+    <form id="comments">
+        <h1 class="main-title">Bewerte unseren Service!</h1>
+        <div class="comments-name-wrapper">
+            <sl-input id="comments-name" class="comments-input" type="text" label="Vorname" autocomplete="given-name" required></sl-input>
+            <sl-input id="comments-family-name" class="comments-input" type="text" label="Nachname" autocomplete="family-name" required></sl-input>
+        </div>
+        <sl-input id="comments-email" class="comments-input" type="email" label="E-Mail Adresse" help-text="Deine E-Mail wird nur zur Verifizierung gebraucht." autocomplete="email" required></sl-input>
+        <label for="comments-file">Dein Profilbild</label>
+        <label for="comments-file" class="comments-file-label comments-input" title="Bilder hochladen">
+            <img src="/img/upload.svg" alt="Bilder hochladen">
+            <input id="comments-file" class="visually-hidden" type="file" accept="image/*">
+        </label>
+        <div id="comments-files"></div>
+        <sl-rating label="Bewerte uns" class="comments-rating" id="comments-rating"></sl-rating>
+        <sl-textarea id="comments-message" class="comments-input" label="Ausführliche Bewertung" required></sl-textarea>
+        <button id="comments-submit" type="button" class="primary-btn" title="Nachricht senden">Absenden</button>
+        <button id="comments-close" type="button" class="close-btn" title="Schliessen">
+            <img src="/img/close.svg" alt="Ein X zum Schliessen">
+        </button>
+    </form>
+    <div id="alerts-graveyard"></div>
+    <footer></footer>
 </body>
 </html>

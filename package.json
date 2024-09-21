@@ -21,6 +21,9 @@
     "ejs": "^3.1.10",
     "express": "^4.19.2",
     "express-session": "^1.18.0",
+    "imagekit": "^5.2.0",
+    "mysql2": "^3.11.3",
+    "node-mailjet": "^6.0.6",
     "timonjs": "^1.0.5"
   },
   "devDependencies": {

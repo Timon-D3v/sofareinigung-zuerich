@@ -1,0 +1,27 @@
+<header>
+        <div class="logo-wrapper">
+            <a href="<%= CONFIG.origin %>" class="logo">
+                <img src="/img/logo.svg" alt="Logo" title="Logo">
+                <span><%- CONFIG.NAME_HTML %></span>
+            </a>
+        </div>
+        <div class="shortcuts">
+            <div class="phone">
+                <a href="tel:<%= CONFIG.PHONE %>" class="phone-number" title="Rufen Sie gerne an."><%= phone %></a>
+            </div>
+            <div class="contact">
+                <button type="button" class="primary-btn open-contact-form" title="Jetzt einen Termin finden">Jetzt kontaktieren</button>
+            </div>
+            <div class="socials">
+                <a class="socials-link" href="<%= CONFIG.LINKS.FACEBOOK %>">
+                    <img src="/img/facebook.svg" alt="Facebook" title="Facebook" class="socials-icon">
+                </a>
+                <a class="socials-link" href="<%= CONFIG.LINKS.INSTAGRAM %>">
+                    <img src="/img/instagram.svg" alt="Instagram" title="Instagram" class="socials-icon">
+                </a>
+                <a class="socials-link" href="<%= CONFIG.LINKS.WHATSAPP %>">
+                    <img src="/img/whatsapp.svg" alt="WhatsApp" title="WhatsApp" class="socials-icon">
+                </a>
+            </div>
+        </div>
+    </header>

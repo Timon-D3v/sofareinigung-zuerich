@@ -1,0 +1,24 @@
+<div class="floating-card-wrapper">
+                    <div class="floating-header">
+                        <div class="floating-img-wrapper">
+                            <img class="floating-img" alt="<%= name %> <%= family_name %>" src="<%= image %>" loading="lazy">
+                        </div>
+                        <div class="floating-user">
+                            <h4><%= name %> <%= family_name %></h4>
+                        </div>
+                    </div>
+                    <div class="single-review">
+                        <p><%= review %></p>
+                    </div>
+                    <div class="review-footer">
+                        <div class="rating"><%
+                            for (let i = 0; i < rating; i++) { %>
+                            <span class="active">&#9733;</span><%
+                            }
+                            for (let i = 0; i < 5 - rating; i++) { %>
+                            <span>&#9734;</span><%
+                            } %>
+                        </div>
+                        <p>Bewertet am <%= date.toLocaleDateString("en-GB", { day: "2-digit", month: "2-digit", year: "numeric" }) %></p>
+                    </div>
+                </div>

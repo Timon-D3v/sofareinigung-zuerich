@@ -14,6 +14,7 @@ import CONFIG from "./config.js";
 
 // Import Routes
 import ROUTES___ROOT from "./routes/root.js";
+import ROUTES___API from "./routes/api.js";
 
 
 
@@ -32,6 +33,16 @@ const app = express();
 app.set("view engine", "ejs");
 
 app.use(express.static("public"));
+
+app.use(bodyParser.json({
+    limit: "10gb",
+    extended: true
+}));
+
+app.use(bodyParser.urlencoded({
+    limit: "10gb",
+    extended: true
+}));
 
 app.use(session({
     secret: SESSION_SECRET_KEY,
@@ -53,6 +64,10 @@ app.use(cors());
 
 // Routes
 app.use("/", ROUTES___ROOT);
+app.use("/api", ROUTES___API);
+
+app.get("*", (req, res) => res.status(404).redirect("/"));
+app.post("*", (req, res) => res.status(404).end());
 
 
 
