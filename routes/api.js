@@ -123,6 +123,15 @@ router.post("/commentsConfirm", async (req, res) => {
     }
 });
 
+router.get("/phone", (req, res) => {
+    try {
+        res.status(200).send(CONFIG.PHONE);
+    } catch (error) {
+        timon.errorLog(error);
+        res.status(500).send("Etwas hat nicht geklappt. Bitte versuche es später erneut.");
+    }
+});
+
 
 
 export default router;

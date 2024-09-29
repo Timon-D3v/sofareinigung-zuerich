@@ -49,12 +49,12 @@ async function init() {
     });
 
     canvas.on("mouseenter", rotateCouchX);
-    canvas.on("touchstart", rotateCouchX);
+    canvas.on("touchstart", rotateCouchX, { passive: true });
     canvas.on("mouseleave", () => canAnimate = true);
-    canvas.on("touchcancel", () => canAnimate = true);
-    canvas.on("touchend", () => canAnimate = true);
+    canvas.on("touchcancel", () => canAnimate = true, { passive: true });
+    canvas.on("touchend", () => canAnimate = true, { passive: true });
     canvas.on("mousemove", rotateCouch);
-    canvas.on("touchmove", rotateCouch);
+    canvas.on("touchmove", rotateCouch, { passive: true });
     canvas.click(scaleCouch);
 
     function render() {

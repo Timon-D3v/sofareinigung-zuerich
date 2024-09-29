@@ -84,6 +84,13 @@ commentsFile.on("change", async () => {
     }
 });
 
+getElm("footer-copy-phone").click(async () => {
+    const response = await GETText("/api/phone");
+    navigator.clipboard.writeText(response);
+    customInfoField("Telefonnummer kopiert.");
+});
+
+
 getElm("contact-submit").click(submitContactForm);
 getElm("contact-close").click(contactOut);
 getElm("comments-open").click(commentIn);
@@ -91,8 +98,12 @@ getElm("comments-close").click(commentOut);
 getElm("comments-submit").click(submitCommentsForm);
 
 getQuery(".open-contact-form").click(contactIn);
+getQuery(".open-comment-form").click(commentIn);
+
 getQuery(".scroll-to-contact").click(() => scrollToQuery("#scrollTo___contact"));
 getQuery(".scroll-to-explore").click(() => scrollToQuery("#scrollTo___explore"));
+getQuery(".scroll-to-top").click(() => scrollToQuery(".scrollTo___top"));
+getQuery(".open-administration").click(() => window.location.href = "/administration");
 
 commentsAnimation();
 
@@ -142,8 +153,8 @@ function commentsAnimation() {
 function imgCompareDimensions() {
     getQuery("sl-image-comparer").forEach(element => {
         element.css({
-            "--width": element.x() + "px",
-            "--height": element.y() + "px"
+            "--width": `${element.x()}px`,
+            "--height": `${element.y()}px`
         });
     });
 }
@@ -454,3 +465,5 @@ function customErrorField(message) {
 function customInfoField(message) {
     customField(message, "primary", "Info:", "info-circle");
 }
+
+timonjs_message();

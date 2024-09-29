@@ -24,7 +24,7 @@
     "imagekit": "^5.2.0",
     "mysql2": "^3.11.3",
     "node-mailjet": "^6.0.6",
-    "timonjs": "^1.0.5"
+    "timonjs": "^2.0.5"
   },
   "devDependencies": {
     "nodemon": "^3.1.4"

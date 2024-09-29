@@ -1,5 +1,17 @@
 <!DOCTYPE html>
 <html lang="ch-de">
+<!--
+             ,,                                                 ,,
+MMP""MM""YMM db                                               `7MM
+P'   MM   `7                                                    MM
+     MM    `7MM  `7MMpMMMb.pMMMb.  ,pW"Wq.`7MMpMMMb.       ,M""bMM  .gP"Ya `7M'   `MF'
+     MM      MM    MM    MM    MM 6W'   `Wb MM    MM     ,AP    MM ,M'   Yb  VA   ,V
+     MM      MM    MM    MM    MM 8M     M8 MM    MM     8MI    MM 8M""""""   VA ,V
+     MM      MM    MM    MM    MM YA.   ,A9 MM    MM  ,, `Mb    MM YM.    ,    VVV
+   .JMML.  .JMML..JMML  JMML  JMML.`Ybmd9'.JMML  JMML.db  `Wbmd"MML.`Mbmmd'     W
+
+Visit https://timondev.com
+-->
 <head>
     <%- include("./snippets/head.ejs", {
         title,
@@ -8,16 +20,6 @@
         url,
         CONFIG
     }) %>
-    <script type="importmap">
-        {
-            "imports": {
-                "timonjs": "https://cdn.jsdelivr.net/npm/timonjs/dist/timon.module.min.mjs",
-                "three": "https://cdn.jsdelivr.net/npm/three/build/three.module.min.js",
-                "three/examples/jsm/": "https://cdn.jsdelivr.net/npm/three/examples/jsm/",
-                "gsap": "https://cdn.skypack.dev/gsap"
-            }
-        }
-    </script>
     <script type="module" src="/js/scene.js" defer></script>
     <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/cdn/shoelace-autoloader.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/cdn/themes/light.css">
@@ -33,7 +35,7 @@
         phone
     }) %>
     <main>
-        <section class="hero">
+        <section class="hero scrollTo___top">
             <div class="hero-content">
                 <h1 class="hero-title">Willkommen bei <span class="hero-special-text">Sofareinigung</span> Zürich</h1>
                 <p class="hero-text">Ihr Spezialist für <strong>Tiefenreinigung</strong> von <strong>Sofas</strong> und <strong>Polstern</strong> vor Ort</p>
@@ -127,7 +129,7 @@
                 for (let i = 0; i < compare.length; i++) { 
                 %>
                 <sl-carousel-item class="carousel-item">
-                    <sl-image-comparer position="50" handle="/img/blob.svg" class="image-comparer">
+                    <sl-image-comparer position="50" class="image-comparer" style="--width: 0px; --height: 0px;">
                         <img slot="before" src="<%= compare[i][0] %>" alt="Vorher" class="compare-img">
                         <img slot="after" src="<%= compare[i][1] %>" alt="Nachher" class="compare-img">
                         <img slot="handle" src="/img/three-dots.svg" alt="Vergleichen" class="compare-handle">
@@ -208,7 +210,13 @@
             <img src="/img/close.svg" alt="Ein X zum Schliessen">
         </button>
     </form>
+    <div class="hidden devs">
+        <div id="phone"><%= phone %></div>
+    </div>
     <div id="alerts-graveyard"></div>
-    <footer></footer>
+    <%- include("./snippets/footer.ejs", {
+        phone,
+        CONFIG
+    }) %>
 </body>
 </html>

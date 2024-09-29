@@ -885,6 +885,84 @@ sl-alert::part(base) {
     z-index: 900;
 }
 
+footer *::selection {
+    background-color: rgba(143, 156, 163, 0.5); /* secondary-400 */
+}
+
+.footer-top {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(2 * var(--dynamic-padding));
+    justify-content: center;
+    padding: 3rem var(--dynamic-padding);
+    box-sizing: border-box;
+    color: var(--text-50);
+}
+
+.footer-logo {
+    display: grid;
+    place-items: center;
+}
+
+.footer-logo img {
+    width: 100%;
+    height: auto;
+    max-height: 6rem;
+    max-width: 6rem;
+    aspect-ratio: 1 / 1;
+    filter: invert(1);
+}
+
+.footer-element {
+    margin: 0;
+    padding: 0;
+}
+
+.footer-element li {
+    list-style: none;
+    cursor: pointer;
+    margin-bottom: 0.5rem;
+}
+
+.footer-bottom {
+    padding: 3rem 0;
+    margin: 0 var(--dynamic-padding);
+    box-sizing: border-box;
+    border-top: 1px solid var(--background-100);
+}
+
+.footer-socials {
+    height: 2rem;
+    display: flex;
+    gap: 1.5svw;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-socials a {
+    height: 100%;
+    width: auto;
+    aspect-ratio: 1 / 1;
+}
+
+.footer-socials img {
+    height: 100%;
+    width: auto;
+    aspect-ratio: 1 / 1;
+    filter: invert(1);
+}
+
+.footer-socials a:last-child img {
+    filter: none;
+}
+
+.footer-legal {
+    text-align: center;
+    color: var(--text-50);
+    font-size: 1rem;
+}
+
 
 
 @media screen and (min-width: 1200px) {
@@ -969,6 +1047,10 @@ sl-alert::part(base) {
     .hero-content {
         align-items: center;
     }
+
+    .footer-element li {
+        margin-bottom: 0;
+    }
 }
 
 @media screen and (max-width: 575px) {
@@ -1026,6 +1108,15 @@ sl-alert::part(base) {
     .comments-rating {
         --symbol-size: 2rem;
         margin: 1rem 0;
+    }
+
+    .footer-top {
+        gap: var(--dynamic-padding);
+        justify-content: flex-start;
+    }
+
+    .footer-element li {
+        margin-bottom: 0;
     }
 
     @media screen and (min-width: 400px) {
