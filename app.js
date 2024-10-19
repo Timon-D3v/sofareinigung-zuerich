@@ -8,6 +8,8 @@ import fs from "fs";
 
 // Import Components
 import functions from "./components/functions.js";
+import notAuth from "./components/not.auth.js";
+import auth from "./components/auth.js";
 
 // Import Constants
 import CONFIG from "./config.js";
@@ -15,6 +17,8 @@ import CONFIG from "./config.js";
 // Import Routes
 import ROUTES___ROOT from "./routes/root.js";
 import ROUTES___API from "./routes/api.js";
+import ROUTES___AUTH from "./routes/auth.js";
+import ROUTES___ADMIN from "./routes/admin.js";
 
 
 
@@ -65,6 +69,8 @@ app.use(cors());
 // Routes
 app.use("/", ROUTES___ROOT);
 app.use("/api", ROUTES___API);
+app.use("/auth", notAuth, ROUTES___AUTH);
+app.use("/admin", auth, ROUTES___ADMIN);
 
 app.get("*", (req, res) => res.status(404).redirect("/"));
 app.post("*", (req, res) => res.status(404).end());

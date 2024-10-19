@@ -1,5 +1,6 @@
 // Import
 import dotenv from "dotenv";
+import get from "./components/get.database.js";
 
 // Load environment variables
 dotenv.config();
@@ -14,6 +15,14 @@ export default {
     LOGO_SHARE_MIMETYPE: "image/png",
     ENV: process.env.ENV,
     PORT: process.env.PORT,
+    EMAIL: await get("email"),
+    EMAIL_PERSONAL: await get("email_personal"),
+    PHONE: await get("phone"),
+    LINKS: {
+        INSTAGRAM: await get("link_instagram"),
+        FACEBOOK: await get("link_facebook"),
+        WHATSAPP: await get("link_whatsapp")
+    },
     SESSION_SECRET_KEY: process.env.SESSION_SECRET_KEY,
     MYSQL: {
         HOST: process.env.MYSQL_HOST,
@@ -34,6 +43,14 @@ export default {
         HOME: {
             TITLE: "Home",
             DESCRIPTION: "Sofareinigung Zürich ist Ihr professioneller Partner für die Reinigung von Polstermöbeln in Zürich und Umgebung."
+        },
+        ADMIN: {
+            TITLE: "Verwaltung",
+            DESCRIPTION: "Das ist die Verwaltungsoberfläche von Sofareinigung Zürich."
+        },
+        LOGIN: {
+            TITLE: "Login",
+            DESCRIPTION: "Bitte logge dich ein, um auf die Verwaltungsoberfläche von Sofareinigung Zürich zuzugreifen."
         }
     },
     TEMPLATES: {
@@ -72,17 +89,5 @@ export default {
                 FOOTER: "Falls du nicht versucht hast einen Kommentar auf <a href=\"https://sofareinigung-zuerich.ch\" style=\"color:#8c8c8c;\">sofareinigung-zuerich.ch</a> zu hinterlassen, kannst du diese E-Mail einfach ignorieren oder dich unter info@sofareinigung-zuerich.ch melden."
             }
         }
-    },
-
-
-
-    // Should come from database:
-    EMAIL: "info@sofareinigung-zuerich.ch",
-    EMAIL_PERSONAL: "info@sofareinigung-zuerich.ch",
-    PHONE: "+41788858196",
-    LINKS: {
-        INSTAGRAM: "https://www.instagram.com/sofareinigung_zuerich/",
-        FACEBOOK: "https://www.facebook.com/Sofareinigung-Z%C3%BCrich-101102745662073",
-        WHATSAPP: "https://wa.me/41788858196",
     }
 };

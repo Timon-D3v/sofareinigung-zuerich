@@ -267,7 +267,7 @@ header {
 }
 
 .socials-icon:hover {
-    filter: invert(53%) sepia(9%) saturate(504%) hue-rotate(158deg) brightness(94%) contrast(95%) drop-shadow(0 0 5px var(--accent-500));
+    filter: invert(53%) sepia(9%) saturate(504%) hue-rotate(158deg) brightness(94%) contrast(95%) brightness(150%);
 }
 
 main {
@@ -669,7 +669,7 @@ svg.divider.flipped {
 
 .carousel {
     width: 100%;
-    max-height: 70vh;
+    margin: 0 auto;
     padding: var(--padding-side);
     box-sizing: border-box;
 }
@@ -989,6 +989,12 @@ footer *::selection {
 
     .info-wrapper {
         grid-template-columns: 1fr 1fr;
+    }
+
+    .carousel {
+        --slide-gap: 50px;
+        --scroll-hint: 150px;
+        max-width: 1500px;
     }
 }
 

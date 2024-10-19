@@ -3,6 +3,8 @@ import express from "express";
 import { getComments } from "../components/comments.js";
 import COMPARE from "../components/test.compare.js";
 
+
+
 // Router serves under the root path
 const router = express.Router();
 

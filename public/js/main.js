@@ -103,7 +103,7 @@ getQuery(".open-comment-form").click(commentIn);
 getQuery(".scroll-to-contact").click(() => scrollToQuery("#scrollTo___contact"));
 getQuery(".scroll-to-explore").click(() => scrollToQuery("#scrollTo___explore"));
 getQuery(".scroll-to-top").click(() => scrollToQuery(".scrollTo___top"));
-getQuery(".open-administration").click(() => window.location.href = "/administration");
+getQuery(".open-administration").click(() => window.location.href = "/admin");
 
 commentsAnimation();
 

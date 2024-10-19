@@ -1,0 +1,25 @@
+import express from "express";
+import CONFIG from "../config.js";
+import { getComments } from "../components/comments.js";
+
+
+
+// Router serves under /admin and is secured with the auth middleware
+const router = express.Router();
+
+router.get("/", async (req, res) => {
+    const comments = await getComments();
+
+    res.render("admin.ejs", {
+        CONFIG,
+        url: req.url,
+        origin: req.protocol + "://" + req.get("host"),
+        title: CONFIG.PAGES.ADMIN.TITLE,
+        description: CONFIG.PAGES.ADMIN.DESCRIPTION,
+        comments
+    });
+});
+
+
+
+export default router;

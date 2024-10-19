@@ -1,6 +1,6 @@
 {
   "name": "sofareinigung-zuerich",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "type": "module",
   "description": "Dieses Repo enthält den Code für die Webseite sofareinigung-zuerich.ch",
   "main": "app.js",
@@ -15,6 +15,7 @@
   "author": "Timon Fiedler",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",

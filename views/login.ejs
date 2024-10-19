@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ch-de">
+<!--
+  _______                            __         
+ /_  __(_)___ ___  ____  ____   ____/ /__ _   __
+  / / / / __ `__ \/ __ \/ __ \ / __  / _ \ | / /
+ / / / / / / / / / /_/ / / / // /_/ /  __/ |/ / 
+/_/ /_/_/ /_/ /_/\____/_/ /_(_)__,_/\___/|___/  
+
+
+Visit https://www.timondev.com
+-->
+<head>
+    <meta charset="utf-8">
+    <title><%= title %> | <%= CONFIG.NAME %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="description" content="<%= description %>">
+    <meta name="google" content="nositelinkssearchbox">
+    <meta name="robots" content="noindex,nofollow">
+    <meta property="og:title" content="<%= title %> | <%= CONFIG.NAME %>">
+    <meta property="og:url" content="<%= origin + url %>">
+    <meta property="og:description" content="<%= description %>">
+    <meta property="og:image" content="<%= CONFIG.LOGO_SHARE_PATH %>">
+    <meta property="og:image:type" content="<%= CONFIG.LOGO_SHARE_MIMETYPE %>">
+    <link rel="icon" type="<%= CONFIG.LOGO_MIMETYPE %>" href="<%= CONFIG.LOGO_PATH %>">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/css/fonts.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/cdn/themes/light.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/timonjs@2.0.5/dist/timon.min.js"></script>
+    <script type="text/javascript" src="/js/login.js" defer></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.17.1/cdn/components/icon/icon.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.17.1/cdn/components/alert/alert.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.17.1/cdn/components/input/input.js"></script>
+</head>
+<body><% let phone = CONFIG.PHONE;
+    if (phone.length === 10) {
+        phone = phone.replace(/(\d{3})(\d{3})(\d{2})(\d{2})/, '$1 $2 $3 $4');
+    } else if (phone.length === 12) {
+        phone = phone.replace(/(\d{2})(\d{2})(\d{3})(\d{2})(\d{2})/, '$1 $2 $3 $4 $5');
+    } %>
+    <%- include("./snippets/header.ejs", {
+        CONFIG,
+        phone,
+        origin
+    }) %>
+    <div class="login-wrapper">
+        <form class="login-form">
+            <div class="login-header">
+                <img class="login-img" src="/img/logo.svg" alt="Logo">
+                <h1 class="login-title">Einloggen</h1>
+            </div>
+            <sl-input type="text" class="login-input" id="username" autocomplete="username" placeholder="Benutzername"></sl-input>
+            <sl-input type="password" class="login-input" id="password" autocomplete="current-password" placeholder="Passwort"></sl-input>
+            <button type="button" class="primary-btn login-btn">Einloggen</button>
+        </form>
+    </div>
+    <div id="alerts-graveyard"></div>
+</body>
+</html>

@@ -1,10 +1,14 @@
 import express from "express";
-import timon from "timonjs";
+import timon, { errorLog } from "timonjs";
 import CONFIG from "../config.js";
+import auth from "../components/auth.js";
 import uploadImage from "../components/imagekit.js";
+import updatePassword from "../components/password.update.auth.js";
 import { ContactEmail, CommentsValidationEmail } from "../components/email.templates.js";
 import { getRandomInt } from "../components/functions.js";
 import { saveComment } from "../components/comments.js";
+import update from "../components/update.database.js";
+import deleteId from "../components/delete.database.js";
 
 
 
@@ -129,6 +133,75 @@ router.get("/phone", (req, res) => {
     } catch (error) {
         timon.errorLog(error);
         res.status(500).send("Etwas hat nicht geklappt. Bitte versuche es später erneut.");
+    }
+});
+
+router.post("/setPassword", auth, async (req, res) => {
+    try {
+        const { password } = req.body;
+
+        if (!password) throw new Error("Please fill out all fields.");
+
+        const valid = await updatePassword(password);
+
+        if (!valid) throw new Error("An error occurred while setting the password.");
+
+        res.json({
+            valid,
+            message: "Password set successfully"
+        });
+    } catch (error) {
+        timon.errorLog(error);
+        res.status(500).json({
+            valid: false,
+            message: "An error occurred while setting the password."
+        });
+    }
+});
+
+router.post("/changeDB", auth, async (req, res) => {
+    try {
+        const { name, value } = req.body;
+
+        if (!name || !value) throw new Error("Please fill out all fields.");
+
+        const valid = await update(name, value);
+
+        if (!valid) throw new Error("An error occurred while changing the database.");
+
+        res.json({
+            valid,
+            message: "Database changed successfully."
+        });
+    } catch (error) {
+        timon.errorLog(error);
+        res.status(500).json({
+            valid: false,
+            message: "An error occurred while changing the database."
+        });
+    }
+});
+
+router.post("/deleteComment", auth, async (req, res) => {
+    try {
+        const { id } = req.body;
+
+        if (!id) throw new Error("Please fill out all fields.");
+
+        const valid = await deleteId(Number(id));
+
+        if (!valid) throw new Error("An error occurred while deleting the comment.");
+
+        res.json({
+            valid,
+            message: "Comment deleted successfully."
+        });
+    } catch (error) {
+        timon.errorLog(error);
+        res.status(500).json({
+            valid: false,
+            message: "An error occurred while deleting the comment."
+        });
     }
 });
 
