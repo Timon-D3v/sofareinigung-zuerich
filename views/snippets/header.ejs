@@ -7,19 +7,27 @@
         </div>
         <div class="shortcuts">
             <div class="phone">
-                <a href="tel:<%= CONFIG.PHONE %>" class="phone-number" title="Rufen Sie gerne an."><%= phone %></a>
+                <a href="tel:<%= CONFIG.PHONE %>" class="phone-number" title="Rufen Sie gerne an." target="_blank"><%= phone %></a>
             </div>
             <div class="contact">
                 <button type="button" class="primary-btn open-contact-form" title="Jetzt einen Termin finden">Jetzt kontaktieren</button>
             </div>
             <div class="socials">
-                <a class="socials-link" href="<%= CONFIG.LINKS.FACEBOOK %>">
+                <a class="socials-link" href="<%= CONFIG.LINKS.FACEBOOK %>" target="_blank">
                     <img src="/img/facebook.svg" alt="Facebook" title="Facebook" class="socials-icon">
                 </a>
-                <a class="socials-link" href="<%= CONFIG.LINKS.INSTAGRAM %>">
+                <a class="socials-link" href="<%= CONFIG.LINKS.INSTAGRAM %>" target="_blank">
                     <img src="/img/instagram.svg" alt="Instagram" title="Instagram" class="socials-icon">
                 </a>
-                <a class="socials-link" href="<%= CONFIG.LINKS.WHATSAPP %>">
+                <a class="socials-link" href="<%= CONFIG.LINKS.WHATSAPP %>" target="_blank">
+                    <img src="/img/whatsapp.svg" alt="WhatsApp" title="WhatsApp" class="socials-icon">
+                </a>
+            </div>
+            <div class="miniature">
+                <a class="socials-link open-contact-form" href="#">
+                    <img src="/img/mail.svg" alt="Ein Brief" title="Jetzt einen Termin finden" class="socials-icon">
+                </a>
+                <a class="socials-link" href="<%= CONFIG.LINKS.WHATSAPP %>" target="_blank">
                     <img src="/img/whatsapp.svg" alt="WhatsApp" title="WhatsApp" class="socials-icon">
                 </a>
             </div>

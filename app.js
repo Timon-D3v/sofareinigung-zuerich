@@ -4,7 +4,6 @@ import bodyParser from "body-parser";
 import express from "express";
 import timon from "timonjs";
 import cors from "cors";
-import fs from "fs";
 
 // Import Components
 import functions from "./components/functions.js";

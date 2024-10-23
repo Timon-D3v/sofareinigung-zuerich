@@ -205,6 +205,39 @@ router.post("/deleteComment", auth, async (req, res) => {
     }
 });
 
+router.post("/uploadCarousel", auth, async (req, res) => {
+    try {
+        const { array } = req.body;
+
+        if (!array || !Array.isArray(array)) throw new Error("Please fill out all fields.");
+
+        const i = array.length - 1;
+
+        const obj1 = await uploadImage(array[i][0], "carousel_file", "/carousel/");
+        const obj2 = await uploadImage(array[i][1], "carousel_file", "/carousel/");
+
+        if (obj1 === null || obj2 === null) throw new Error("An error occurred while uploading the carousel.");
+
+        array[i][0] = obj1.url;
+        array[i][1] = obj2.url;
+
+        const valid = await update("before_after", JSON.stringify(array));
+
+        if (!valid) throw new Error("An error occurred while uploading the carousel.");
+
+        res.json({
+            valid,
+            message: "Carousel uploaded successfully."
+        });
+    } catch (error) {
+        timon.errorLog(error);
+        res.status(500).json({
+            valid: false,
+            message: "An error occurred while uploading the carousel."
+        });
+    }
+});
+
 
 
 export default router;

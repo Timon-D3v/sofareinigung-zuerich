@@ -114,6 +114,16 @@ on(document, "sl-slide-change", imgCompareDimensions);
 
 on(window, "resize", () => getQuery(".carousel").get(0).goToSlide(0));
 
+ready(() => {
+    const elements = getQuery(".miniature .socials-link");
+
+    if (getDevice() === "mobile") {
+        elements.get(0).addClass("hide-me");
+    } else {
+        elements.get(1).addClass("hide-me");
+    }
+});
+
 function commentsAnimation() {
     if (commentsAnimationStart !== null) commentsAnimationStart.kill();
     if (commentsAnimation1 !== null) commentsAnimation1.kill();

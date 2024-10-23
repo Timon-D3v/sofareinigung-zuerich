@@ -35,7 +35,6 @@ Visit https://www.timondev.com
     <main>
         <h1 class="section-title">Willkommen</h1>
         <section>
-            
             <p class="admin-info-text">
                 Hier hast du die volle Kontrolle über die Verwaltung der Inhalte. 
                 Du kannst Daten bearbeiten, aktualisieren oder löschen, um die Seite stets auf dem neuesten Stand zu halten. 
@@ -43,6 +42,29 @@ Visit https://www.timondev.com
                 Du kannst diese einsehen und unpassende oder unangebrachte Beiträge entfernen, 
                 um eine angenehme und respektvolle Atmosphäre zu wahren.
             </p>
+        </section>
+        <h1 class="section-title">Informationen bearbeiten</h1>
+        <section>
+            <sl-carousel class="carousel" navigation pagination loop><%
+                for (let i = 0; i < compare.length; i++) { 
+                %>
+                <sl-carousel-item class="carousel-item">
+                    <sl-image-comparer position="50" class="image-comparer" style="--width: 0px; --height: 0px;">
+                        <img slot="before" src="<%= compare[i][0] %>" alt="Vorher" class="compare-img">
+                        <img slot="after" src="<%= compare[i][1] %>" alt="Nachher" class="compare-img">
+                        <img slot="handle" src="/img/three-dots.svg" alt="Vergleichen" class="compare-handle">
+                    </sl-image-comparer>
+                </sl-carousel-item><% 
+                } %>
+            </sl-carousel>
+            <div class="carousel-edit-wrapper">
+                <label for="carousel-add" class="sl-button-variant-success">
+                    <!-- <sl-button class="carousel-edit-btn" variant="success" id="carousel-prevent">Hinzufügen</sl-button> -->
+                     Hinzufügen
+                </label>
+                <sl-button class="carousel-edit-btn" id="carousel-delete" variant="danger">Löschen</sl-button>
+                <input type="file" class="hidden" multiple accept="image/*" id="carousel-add">
+            </div>
         </section>
         <h1 class="section-title">Informationen bearbeiten</h1>
         <section>
@@ -104,7 +126,7 @@ Visit https://www.timondev.com
                         <th>Kommentar</th>
                         <th>Bewertung</th>
                         <th>Löschen</th>
-                    </tr><% 
+                    </tr><%
                     comments.forEach(comment => { %>
                     <tr id="comment-id-<%= comment.id %>">
                         <td id="comment-email-id-<%= comment.id %>"><%= comment.email %></td>
@@ -119,6 +141,74 @@ Visit https://www.timondev.com
                 </tbody>
             </table>
         </section>
+        <div class="preloader-container" style="display: none;">
+            <div class="preloader-boxes">
+                <div class="preloader-box"></div>
+                <div class="preloader-box"></div>
+                <div class="preloader-box"></div>
+                <div class="preloader-box"></div>
+                <div class="preloader-box"></div>
+                <div class="preloader-box"></div>
+                <div class="preloader-box"></div>
+                <div class="preloader-box"></div>
+                <div class="preloader-box"></div>
+                <div class="preloader-box"></div>
+                <div class="preloader-box"></div>
+                <div class="preloader-box"></div>
+            </div>
+        </div>
+        <form id="contact">
+            <h1 class="main-title">Kontaktiere uns!</h1>
+            <div class="contact-name-wrapper">
+                <sl-input id="contact-name" class="contact-input" type="text" label="Vorname" autocomplete="given-name" required></sl-input>
+                <sl-input id="contact-family-name" class="contact-input" type="text" label="Nachname" autocomplete="family-name" required></sl-input>
+            </div>
+            <sl-input id="contact-email" class="contact-input" type="email" label="E-Mail Adresse" autocomplete="email" required></sl-input>
+            <sl-textarea id="contact-message" class="contact-input" label="Nachricht" required help-text="Lade bitte mindestens ein Bild hoch"></sl-textarea>
+            <label for="contact-file" class="contact-file-label contact-input" title="Bilder hochladen">
+                <img src="/img/upload.svg" alt="Bilder hochladen">
+                <input id="contact-file" class="visually-hidden" type="file" accept="image/*" multiple>
+            </label>
+            <div id="contact-files"></div>
+            <button id="contact-submit" type="button" class="primary-btn" title="Nachricht senden">Senden</button>
+            <button id="contact-close" type="button" class="close-btn" title="Schliessen">
+                <img src="/img/close.svg" alt="Ein X zum Schliessen">
+            </button>
+        </form>
+        <form id="comments">
+            <h1 class="main-title">Bewerte unseren Service!</h1>
+            <div class="comments-name-wrapper">
+                <sl-input id="comments-name" class="comments-input" type="text" label="Vorname" autocomplete="given-name" required></sl-input>
+                <sl-input id="comments-family-name" class="comments-input" type="text" label="Nachname" autocomplete="family-name" required></sl-input>
+            </div>
+            <sl-input id="comments-email" class="comments-input" type="email" label="E-Mail Adresse" help-text="Deine E-Mail wird nur zur Verifizierung gebraucht." autocomplete="email" required></sl-input>
+            <label for="comments-file">Dein Profilbild</label>
+            <label for="comments-file" class="comments-file-label comments-input" title="Bilder hochladen">
+                <img src="/img/upload.svg" alt="Bilder hochladen">
+                <input id="comments-file" class="visually-hidden" type="file" accept="image/*">
+            </label>
+            <div id="comments-files"></div>
+            <sl-rating label="Bewerte uns" class="comments-rating" id="comments-rating"></sl-rating>
+            <sl-textarea id="comments-message" class="comments-input" label="Ausführliche Bewertung" required></sl-textarea>
+            <button id="comments-submit" type="button" class="primary-btn" title="Nachricht senden">Absenden</button>
+            <button id="comments-close" type="button" class="close-btn" title="Schliessen">
+                <img src="/img/close.svg" alt="Ein X zum Schliessen">
+            </button>
+        </form>
+        <div class="hidden devs">
+            <div id="phone"><%= phone %></div>
+            <div id="carousel-array"><%= JSON.stringify(compare) %></div>
+
+            <!-- This section is that main.js does not throw any errors -->
+            <div class="info-video-play-icon"></div>
+            <div class="reviews-wrapper"></div>
+            <div class="reviews-wrapper"></div>
+            <div class="floating-card-wrapper"></div>
+            <div class="floating-card-wrapper"></div>
+            <div class="scroll-to-explore"></div>
+            <div class="scroll-to-contact"></div>
+            <div id="comments-open"></div>
+        </div>
     </main>
     <%- include("./snippets/footer.ejs", {
         CONFIG,

@@ -1,5 +1,6 @@
 import express from "express";
 import CONFIG from "../config.js";
+import get from "../components/get.database.js";
 import { getComments } from "../components/comments.js";
 
 
@@ -9,6 +10,7 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
     const comments = await getComments();
+    const compare = await get("before_after");
 
     res.render("admin.ejs", {
         CONFIG,
@@ -16,7 +18,8 @@ router.get("/", async (req, res) => {
         origin: req.protocol + "://" + req.get("host"),
         title: CONFIG.PAGES.ADMIN.TITLE,
         description: CONFIG.PAGES.ADMIN.DESCRIPTION,
-        comments
+        comments,
+        compare: JSON.parse(compare)
     });
 });
 

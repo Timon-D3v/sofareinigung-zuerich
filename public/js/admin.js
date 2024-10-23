@@ -1,3 +1,15 @@
+const carouselArray = getElm("carousel-array");
+let currentSlide= {
+    index: 0,
+    slide: document.querySelector(".carousel-item")
+};
+
+
+
+on(document, "sl-slide-change", e => {
+    currentSlide = e.detail;
+});
+
 getElm("submit-password").click(async () => {
     const input = getElm(`change-password`);
     
@@ -17,6 +29,81 @@ getElm("submit-password").click(async () => {
     input.val("");
 
     alert("Erfolgreich geändert.");
+});
+
+getElm("carousel-delete").click(async () => {
+    const really = confirm(`Willst du wirklich Nummer ${currentSlide.index + 1} vom Carousel löschen?`);
+
+    if (!really) return;
+
+    const array = JSON.parse(carouselArray.text());
+
+    array.splice(currentSlide.index, 1);
+
+    const response = await post("/api/changeDB", {
+        name: "before_after",
+        value: JSON.stringify(array)
+    });
+
+    if (!response?.valid) return alert("Etwas hat nicht geklappt. Bitte versuche es später erneut.");
+
+    carouselArray.text(JSON.stringify(array));
+    currentSlide.slide.remove();
+
+    alert("Erfolgreich gelöscht.");
+});
+
+getElm("carousel-add").on("change", async () => {
+    const input = getElm("carousel-add");
+
+    if (input.files.length !== 2) return alert("Bitte lade genau zwei Bilder hoch.");
+
+    const array = JSON.parse(carouselArray.text());
+
+    array.push([
+        await toBase64(input.files[1]),
+        await toBase64(input.files[0])
+    ]);
+
+    const response = await post("/api/uploadCarousel", {
+        array
+    });
+
+    if (!response?.valid) return alert("Etwas hat nicht geklappt. Bitte versuche es später erneut.");
+
+    carouselArray.text(JSON.stringify(array));
+
+    alert("Erfolgreich hinzugefügt.");
+
+    const wrapper = createElm("sl-carousel-item");
+    wrapper.classList.add("carousel-item");
+
+    const comparer = createElm("sl-image-comparer");
+    comparer.addClass("image-comparer");
+
+    const before = createElm("img");
+    const after = createElm("img");
+    const handle = createElm("img");
+
+    before.addClass("compare-img");
+    after.addClass("compare-img");
+    handle.addClass("compare-handle");
+
+    before.src = array[array.length - 1][0];
+    after.src = array[array.length - 1][1];
+    handle.src = "/img/three-dots.svg";
+
+    before.alt = "Vorher";
+    after.alt = "Nachher";
+    handle.alt = "Vergleichen";
+
+    before.slot = "before";
+    after.slot = "after";
+    handle.slot = "handle";
+
+    comparer.append(before, after, handle);
+    wrapper.append(comparer);
+    getQuery(".carousel").get(0).append(wrapper);
 });
 
 getQuery(".admin-change-submit").forEach(element => {

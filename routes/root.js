@@ -1,7 +1,7 @@
 import CONFIG from "../config.js";
 import express from "express";
 import { getComments } from "../components/comments.js";
-import COMPARE from "../components/test.compare.js";
+import get from "../components/get.database.js";
 
 
 
@@ -9,6 +9,7 @@ import COMPARE from "../components/test.compare.js";
 const router = express.Router();
 
 router.get("/", async (req, res) => {
+    const compare = await get("before_after");
     
     let COMMENTS = await getComments();
 
@@ -23,7 +24,7 @@ router.get("/", async (req, res) => {
         title: CONFIG.PAGES.HOME.TITLE,
         description: CONFIG.PAGES.HOME.DESCRIPTION,
         comments: COMMENTS,
-        compare: COMPARE
+        compare: JSON.parse(compare)
     });
 });
 

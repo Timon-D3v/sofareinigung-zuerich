@@ -54,3 +54,40 @@ td, th {
 tr:nth-child(even) {
     background-color: var(--secondary-100);
 }
+
+.carousel-edit-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--dynamic-padding);
+}
+
+section:has(.carousel) {
+    background-color: inherit;
+}
+
+.sl-button-variant-success {
+    background-color: var(--sl-color-success-600);
+    display: inline-flex;
+    color: var(--sl-color-neutral-0);
+    min-height: var(--sl-input-height-medium);
+    font-size: var(--sl-button-font-size-medium);
+    line-height: calc(var(--sl-input-height-medium) - var(--sl-input-border-width) * 2);
+    border-radius: var(--sl-input-border-radius-medium);
+    align-items: stretch;
+    justify-content: center;
+    border: solid var(--sl-input-border-width) var(--sl-color-success-600);
+    font-family: var(--sl-input-font-family);
+    font-weight: var(--sl-font-weight-semibold);
+    text-decoration: none;
+    -webkit-user-select: none;
+    user-select: none;
+    white-space: nowrap;
+    vertical-align: middle;
+    transition: var(--sl-transition-x-fast) background-color,
+    var(--sl-transition-x-fast) color,
+    var(--sl-transition-x-fast) border,
+    var(--sl-transition-x-fast) box-shadow;
+    cursor: pointer;
+    padding: 0 var(--sl-spacing-medium);
+}
