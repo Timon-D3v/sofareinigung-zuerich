@@ -973,6 +973,40 @@ footer *::selection {
     height: var(--header-content-height);
 }
 
+.inline-flex-center {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-info-text {
+    text-align: center;
+    padding: 0 calc(var(--padding-side) * 2);
+}
+
+.contact-file-wrapper > sl-button {
+    margin-bottom: 1rem;
+    flex-grow: 1;
+}
+
+.comments-replace-img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 20 / 7;
+    object-fit: cover;
+    object-position: bottom;
+    filter: brightness(0.9) grayscale(0.4) hue-rotate(160deg);
+}
+
+.floating-reviews:has(.comments-replace-img) {
+    height: auto;
+}
+
+.floating-reviews:has(.comments-replace-img)::before,
+.floating-reviews:has(.comments-replace-img)::after {
+    height: 30%;
+}
+
 
 
 @media screen and (min-width: 1200px) {
@@ -1133,6 +1167,11 @@ footer *::selection {
 
     .footer-element li {
         margin-bottom: 0;
+    }
+
+    .contact-info-text,
+    .main-title {
+        padding: 0;
     }
 
     @media screen and (min-width: 400px) {

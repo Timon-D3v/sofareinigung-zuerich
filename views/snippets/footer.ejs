@@ -4,9 +4,9 @@
                 <img src="/img/logo.svg" alt="Logo von <%= CONFIG.NAME %>" title="<%= CONFIG.NAME %>">
             </div>
             <ul class="footer-element footer-navigation">
-                <li class="scroll-to-top" title="Nach Oben">Nach Oben</li>
-                <li class="open-contact-form" title="Kontaktiere Uns!">Kontaktformular</li>
-                <li class="open-comment-form" title="Zum Bewertungsformular!">Bewerte Uns</li>
+                <li class="scroll-to-top" title="Nach Oben">Nach oben</li>
+                <li class="open-contact-form" title="Kontaktiere mich!">Kontaktformular</li>
+                <li class="open-comment-form" title="Zum Bewertungsformular!">Bewerten Sie mich</li>
                 <li class="open-administration" title="Melde dich an!">Verwaltung</li>
             </ul>
             <ul class="footer-element footer-contact">
@@ -24,22 +24,25 @@
             <ul class="footer-element footer-data">
                 <li id="footer-data-privacy" title="Zur Datenschutzerklärung!">Datenschutz</li>
                 <li id="footer-data-imprint" title="Zum Impressum!">Impressum</li>
-                <li id="footer-data-terms" title="Zu den AGBs!">AGBs</li>
+                <!-- <li id="footer-data-terms" title="Zu den AGBs!">AGBs</li> -->
             </ul>
         </div>
         <div class="footer-bottom">
             <div class="footer-socials">
-                <a href="<%= CONFIG.LINKS.FACEBOOK %>" title="Facebook" target="_blank">
+                <!-- <a href="<%= CONFIG.LINKS.FACEBOOK %>" title="Facebook" target="_blank">
                     <img src="/img/facebook.svg" alt="Facebook">
                 </a>
                 <a href="<%= CONFIG.LINKS.INSTAGRAM %>" title="Instagram" target="_blank">
                     <img src="/img/instagram.svg" alt="Instagram">
+                </a> -->
+                <a class="open-contact-form" href="#">
+                    <img src="/img/mail.svg" alt="Ein Brief" title="Jetzt einen Termin finden" class="socials-icon">
                 </a>
                 <a href="<%= CONFIG.LINKS.WHATSAPP %>" title="WhatsApp" target="_blank">
-                    <img src="/img/whatsapp.svg" alt="WhatsApp">
+                    <img src="/img/whatsapp.svg" alt="WhatsApp" class="socials-icon">
                 </a>
                 <a href="https://www.timondev.com" title="Seite des Entwicklers" target="_blank">
-                    <img src="https://ik.imagekit.io/timon/cdn/logo/logo_plain.svg" alt="Logo des Entwicklers">
+                    <img src="https://ik.imagekit.io/timon/cdn/logo/logo_plain.svg" alt="Logo des Entwicklers" class="socials-icon">
                 </a>
             </div>
             <p class="footer-legal">Copyright &copy; <%= new Date().getFullYear() %> <%= CONFIG.NAME %>. Alle Rechte vorbehalten.</p>

@@ -94,12 +94,12 @@ export class ContactEmail {
                     <tr>
                       <td style="word-break:break-word;font-size:0px;padding:0px" align="center">
                         <div style="color:#8c8c8c;font-family:Roboto,Helvetica,Arial,sans-serif;font-size:12px;line-height:22px">
-                          <a href="${CONFIG.LINKS.INSTAGRAM}" style="text-decoration:none;color:inherit;padding:0 4px" target="_blank">
+                          <!--<a href="${CONFIG.LINKS.INSTAGRAM}" style="text-decoration:none;color:inherit;padding:0 4px" target="_blank">
                             <img alt="${CONFIG.TEMPLATES.EMAIL.GLOBAL.IMG.INSTAGRAM.ALT}" src="${CONFIG.TEMPLATES.EMAIL.GLOBAL.IMG.INSTAGRAM.SRC}" style="border:none;outline:none;text-decoration:none;height:28px;width:28px" width="28" height="28">
                           </a>
                           <a href="${CONFIG.LINKS.FACEBOOK}" style="text-decoration:none;color:inherit;padding:0 4px" target="_blank">
                             <img alt="${CONFIG.TEMPLATES.EMAIL.GLOBAL.IMG.FACEBOOK.ALT}" src="${CONFIG.TEMPLATES.EMAIL.GLOBAL.IMG.FACEBOOK.SRC}" style="border:none;outline:none;text-decoration:none;height:28px;width:28px" width="28" height="28">
-                          </a>
+                          </a>-->
                           <a href="${CONFIG.LINKS.WHATSAPP}" style="text-decoration:none;color:inherit;padding:0 4px" target="_blank">
                             <img alt="${CONFIG.TEMPLATES.EMAIL.GLOBAL.IMG.WHATSAPP.ALT}" src="${CONFIG.TEMPLATES.EMAIL.GLOBAL.IMG.WHATSAPP.SRC}" style="border:none;outline:none;text-decoration:none;height:28px;width:28px" width="28" height="28">
                           </a>
@@ -226,12 +226,12 @@ export class CommentsValidationEmail {
                   <tr>
                     <td style="word-break:break-word;font-size:0px;padding:0px" align="center">
                       <div style="color:#8c8c8c;font-family:Roboto,Helvetica,Arial,sans-serif;font-size:12px;line-height:22px">
-                        <a href="${CONFIG.LINKS.INSTAGRAM}" style="text-decoration:none;color:inherit;padding:0 4px" target="_blank">
+                        <!--<a href="${CONFIG.LINKS.INSTAGRAM}" style="text-decoration:none;color:inherit;padding:0 4px" target="_blank">
                           <img alt="${CONFIG.TEMPLATES.EMAIL.GLOBAL.IMG.INSTAGRAM.ALT}" src="${CONFIG.TEMPLATES.EMAIL.GLOBAL.IMG.INSTAGRAM.SRC}" style="border:none;outline:none;text-decoration:none;height:28px;width:28px" width="28" height="28">
                         </a>
                         <a href="${CONFIG.LINKS.FACEBOOK}" style="text-decoration:none;color:inherit;padding:0 4px" target="_blank">
                           <img alt="${CONFIG.TEMPLATES.EMAIL.GLOBAL.IMG.FACEBOOK.ALT}" src="${CONFIG.TEMPLATES.EMAIL.GLOBAL.IMG.FACEBOOK.SRC}" style="border:none;outline:none;text-decoration:none;height:28px;width:28px" width="28" height="28">
-                        </a>
+                        </a>-->
                         <a href="${CONFIG.LINKS.WHATSAPP}" style="text-decoration:none;color:inherit;padding:0 4px" target="_blank">
                           <img alt="${CONFIG.TEMPLATES.EMAIL.GLOBAL.IMG.WHATSAPP.ALT}" src="${CONFIG.TEMPLATES.EMAIL.GLOBAL.IMG.WHATSAPP.SRC}" style="border:none;outline:none;text-decoration:none;height:28px;width:28px" width="28" height="28">
                         </a>

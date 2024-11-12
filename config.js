@@ -23,6 +23,7 @@ export default {
         FACEBOOK: await get("link_facebook"),
         WHATSAPP: await get("link_whatsapp")
     },
+    PROD_ORIGIN: process.env.ORIGIN,
     SESSION_SECRET_KEY: process.env.SESSION_SECRET_KEY,
     MYSQL: {
         HOST: process.env.MYSQL_HOST,

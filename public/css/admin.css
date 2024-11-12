@@ -91,3 +91,7 @@ section:has(.carousel) {
     cursor: pointer;
     padding: 0 var(--sl-spacing-medium);
 }
+
+.carousel {
+    padding: 0 0 var(--padding-side) 0 !important;
+}

@@ -35,7 +35,7 @@ Visit https://www.timondev.com
         <section class="hero scrollTo___top">
             <div class="hero-content">
                 <h1 class="hero-title">Willkommen bei <span class="hero-special-text">Sofareinigung</span> Zürich</h1>
-                <p class="hero-text">Ihr Spezialist für <strong>Tiefenreinigung</strong> von <strong>Sofas</strong> und <strong>Polstern</strong> vor Ort</p>
+                <p class="hero-text"><%- text.hero.replace(/(Sofa( |s)|Polster( |n)|Reinigung)/gm, "<strong>$1</strong>") %></p>
                 <div class="hero-cta">
                     <button type="button" class="secondary-btn scroll-to-explore" title="Mehr erfahren">Mehr Erfahren</button>
                     <button type="button" class="primary-btn open-contact-form" title="Jetzt einen Termin finden">Jetzt kontaktieren</button>
@@ -57,22 +57,22 @@ Visit https://www.timondev.com
             <div class="banner-info">
                 <img class="banner-img" src="/img/diamond.svg" alt="Ein Diamant" title="Qualität">
                 <div class="banner-content">
-                    <h2 class="banner-title">Qualität</h2>
-                    <p class="banner-text">Aussergewöhnliche Qualität</p>
+                    <h2 class="banner-title">Professionell</h2>
+                    <p class="banner-text"><%- text.wave.Professionell %></p>
                 </div>
             </div>
             <div class="banner-info">
-                <img class="banner-img" src="/img/basket.svg" alt="Ein Einkaufskorb" title="Angebot">
+                <img class="banner-img" src="/img/location.svg" alt="Ein Ort" title="Angebot">
                 <div class="banner-content">
-                    <h2 class="banner-title">Angebot</h2>
-                    <p class="banner-text">Erhalten Sie ein unverbindliches Angebot</p>
+                    <h2 class="banner-title">Vor Ort</h2>
+                    <p class="banner-text"><%- text.wave["Vor Ort"] %></p>
                 </div>
             </div>
             <div class="banner-info">
                 <img class="banner-img" src="/img/leaf.svg" alt="Ein Blatt" title="Nachhaltigkeit">
                 <div class="banner-content">
-                    <h2 class="banner-title">Nachhaltigkeit</h2>
-                    <p class="banner-text">Reinigen statt neu kaufen</p>
+                    <h2 class="banner-title">Nachhaltig</h2>
+                    <p class="banner-text"><%- text.wave.Nachhaltig %></p>
                 </div>
             </div>
         </section>
@@ -99,16 +99,12 @@ Visit https://www.timondev.com
                     </div>
                 </div>
                 <div class="info-content">
-                    <p class="info-text">
-                        Wir reinigen Ihr Sofa oder Polster vor Ort. Unsere Reinigungsmittel sind umweltfreundlich und schonend für Ihre Möbel. 
-                        Wir reinigen Ihr Sofa oder Polster gründlich und entfernen Flecken und Gerüche. 
-                        Nach der Reinigung ist Ihr Sofa oder Polster wieder wie neu.
-                    </p>
+                    <p class="info-text"><%- text.more.replace(/\\n/gm, "<br>") %></p>
                     <button type="button" class="primary-btn scroll-to-contact" title="Jetzt einen Termin finden">Interessiert?</button>
                 </div>
             </div>
         </section><% 
-        if (comments.length > 0) { %>
+        if (comments.length > 10) { %>
         <section class="floating-reviews">
             <div class="reviews-wrapper"><%
                 for (let i = 0; i < comments.length; i++) { 
@@ -117,9 +113,21 @@ Visit https://www.timondev.com
                 } %>
             </div>
             <div class="reviews-wrapper"></div>
-            <button type="button" id="comments-open" class="primary-btn" title="Bewerte unseren Service">Deine Meinung zählt!</button>
+            <button type="button" id="comments-open" class="primary-btn" title="Bewerten Sie meinen Service">Ihre Meinung zählt!</button>
         </section><% 
-        } %>
+        } else { %>
+        <section class="floating-reviews">
+            <div class="hidden">
+                <div class="reviews-wrapper floating-card-wrapper"></div>
+                <div class="reviews-wrapper"></div>
+            </div>
+            <div class="reviews-wrapper">
+                <img class="comments-replace-img" src="/img/comments-replacement.jpg" alt="Ein sauberes Sofa">
+                <!-- Foto von <a href="https://unsplash.com/de/@krystalblackphoto?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Krystal Black</a> auf <a href="https://unsplash.com/de/fotos/weisser-und-grauer-blumensofasessel-V5OEpF12pzw?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a> -->
+            </div>
+            <button type="button" id="comments-open" class="primary-btn hidden" title="Bewerten Sie meinen Service">Ihre Meinung zählt!</button>
+        </section>
+        <% } %>
         <section class="compare-img">
             <h1 class="main-title">Vorher - Nachher</h1>
             <sl-carousel class="carousel" pagination navigation loop><%
@@ -134,14 +142,14 @@ Visit https://www.timondev.com
                 </sl-carousel-item><% 
                 } %>
             </sl-carousel>
-            <p class="compare-footer">Bilder sagen mehr als tausend Worte</p>
+            <!-- <p class="compare-footer">Bilder sagen mehr als tausend Worte</p> -->
         </section>
         <section class="prefooter-wrapper" id="scrollTo___contact">
-            <h1 class="main-title">Kontaktieren Sie uns!</h1>
+            <h1 class="main-title">Kontaktieren Sie mich!</h1>
             <div class="prefooter">
                 <div class="prefooter-call">
                     <h2 class="prefooter-title">Anrufen</h2>
-                    <button type="button" class="primary-btn anim-scale" title="Rufen Sie gerne an."><%= phone %></button>
+                    <a target="_blank" href="tel:<%= CONFIG.PHONE %>" class="primary-btn anim-scale inline-flex-center" title="Rufen Sie gerne an."><%= phone %></a>
                 </div>
                 <div class="prefooter-playground">
                     <canvas class="prefooter-canvas" id="scene"></canvas>
@@ -170,13 +178,17 @@ Visit https://www.timondev.com
         </div>
     </div>
     <form id="contact">
-        <h1 class="main-title">Kontaktiere uns!</h1>
+        <h1 class="main-title">Kontaktieren Sie mich!</h1>
+        <p class="contact-info-text"><%- text.contact %></p>
         <div class="contact-name-wrapper">
             <sl-input id="contact-name" class="contact-input" type="text" label="Vorname" autocomplete="given-name" required></sl-input>
             <sl-input id="contact-family-name" class="contact-input" type="text" label="Nachname" autocomplete="family-name" required></sl-input>
         </div>
-        <sl-input id="contact-email" class="contact-input" type="email" label="E-Mail Adresse" autocomplete="email" required></sl-input>
-        <sl-textarea id="contact-message" class="contact-input" label="Nachricht" required help-text="Lade bitte mindestens ein Bild hoch"></sl-textarea>
+        <div class="contact-name-wrapper">
+            <sl-input id="contact-email" class="contact-input" type="email" label="E-Mail Adresse" autocomplete="email" required></sl-input>
+            <sl-input id="plz" class="contact-input" type="number" label="Postleitzahl" autocomplete="postal-code" required></sl-input>
+        </div>
+        <sl-textarea id="contact-message" class="contact-input" label="Nachricht" required help-text="Laden Sie bitte mindestens ein Bild ihres Sofas hoch"></sl-textarea>
         <label for="contact-file" class="contact-file-label contact-input" title="Bilder hochladen">
             <img src="/img/upload.svg" alt="Bilder hochladen">
             <input id="contact-file" class="visually-hidden" type="file" accept="image/*" multiple>
@@ -188,19 +200,19 @@ Visit https://www.timondev.com
         </button>
     </form>
     <form id="comments">
-        <h1 class="main-title">Bewerte unseren Service!</h1>
+        <h1 class="main-title">Bewerten Sie meinen Service!</h1>
         <div class="comments-name-wrapper">
             <sl-input id="comments-name" class="comments-input" type="text" label="Vorname" autocomplete="given-name" required></sl-input>
             <sl-input id="comments-family-name" class="comments-input" type="text" label="Nachname" autocomplete="family-name" required></sl-input>
         </div>
-        <sl-input id="comments-email" class="comments-input" type="email" label="E-Mail Adresse" help-text="Deine E-Mail wird nur zur Verifizierung gebraucht." autocomplete="email" required></sl-input>
-        <label for="comments-file">Dein Profilbild</label>
+        <sl-input id="comments-email" class="comments-input" type="email" label="E-Mail Adresse" help-text="Ihre E-Mail wird nur zur Verifizierung gebraucht." autocomplete="email" required></sl-input>
+        <label for="comments-file">Ihr Profilbild</label>
         <label for="comments-file" class="comments-file-label comments-input" title="Bilder hochladen">
             <img src="/img/upload.svg" alt="Bilder hochladen">
             <input id="comments-file" class="visually-hidden" type="file" accept="image/*">
         </label>
         <div id="comments-files"></div>
-        <sl-rating label="Bewerte uns" class="comments-rating" id="comments-rating"></sl-rating>
+        <sl-rating label="Bewerten Sie mich" class="comments-rating" id="comments-rating"></sl-rating>
         <sl-textarea id="comments-message" class="comments-input" label="Ausführliche Bewertung" required></sl-textarea>
         <button id="comments-submit" type="button" class="primary-btn" title="Nachricht senden">Absenden</button>
         <button id="comments-close" type="button" class="close-btn" title="Schliessen">

@@ -10,6 +10,7 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
     const comments = await getComments();
+    const text = await get("text");
     const compare = await get("before_after");
 
     res.render("admin.ejs", {
@@ -19,7 +20,8 @@ router.get("/", async (req, res) => {
         title: CONFIG.PAGES.ADMIN.TITLE,
         description: CONFIG.PAGES.ADMIN.DESCRIPTION,
         comments,
-        compare: JSON.parse(compare)
+        compare: JSON.parse(compare),
+        text: JSON.parse(text)
     });
 });
 

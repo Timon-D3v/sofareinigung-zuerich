@@ -7,6 +7,7 @@ import cors from "cors";
 
 // Import Components
 import functions from "./components/functions.js";
+import origin from "./components/origin.js";
 import notAuth from "./components/not.auth.js";
 import auth from "./components/auth.js";
 
@@ -62,6 +63,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 app.use(cors());
+
+app.use(origin);
 
 
 

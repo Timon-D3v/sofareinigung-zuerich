@@ -114,6 +114,10 @@ getQuery(".comment-delete-btn").forEach(button => {
     button.click(() => deleteComment(button.data("data-comment-id")))
 });
 
+["hero", "more", "contact", "Nachhaltig", "Vor-Ort", "Professionell"].forEach(type => {
+    getElm(`submit-text-${type}`).click(() => updateText(type.replace(/-/g, " ")));
+});
+
 async function updateInfos(type) {
     const input = getElm(`change-${type}`);
 
@@ -136,6 +140,35 @@ async function updateInfos(type) {
     input.val("");
 
     alert("Erfolgreich geändert.");
+}
+
+async function updateText(type) {
+    const commonType = type.replace(/hero/, "Untertitel ganz oben").replace(/more/, "Mehr Erfahren").replace(/contact/, "Anleitung zur Kontaktaufnahme");
+    const input = getElm(`change-text-${type}`);
+    const text = JSON.parse(getElm("text-obj").text());
+
+    const really = await confirm(`Willst du wirklich "${commonType}" zu "${input.val()}" ändern?`);
+
+    if (!really) return;
+
+    if (input.valIsEmpty()) return alert("Bitte fülle das Feld aus.");
+
+    if (["hero", "more", "contact"].includes(type)) text[type] = input.val();
+    else text.wave[type] = input.val();
+
+    const response = await post("/api/changeDB", {
+        name: "text",
+        value: JSON.stringify(text)
+    });
+
+    if (!response?.valid) return alert("Etwas hat nicht geklappt. Bitte versuche es später erneut.");
+
+    input.placeholder = input.val();
+    input.val("");
+
+    alert("Erfolgreich geändert.");
+
+    getElm("text-obj").text(JSON.stringify(text));
 }
 
 async function deleteComment(id) {

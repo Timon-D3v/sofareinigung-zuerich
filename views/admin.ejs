@@ -88,7 +88,7 @@ Visit https://www.timondev.com
                 <sl-button class="admin-change-submit" id="submit-phone">Aktualisieren</sl-button>
             </div>
         </section>
-        <section>
+        <!-- <section>
             <h3 class="admin-change-title">Instagram Link</h3>
             <div class="admin-change-wrapper">
                 <sl-input class="admin-change-input" id="change-links-instagram" placeholder="<%= CONFIG.LINKS.INSTAGRAM %>"></sl-input>
@@ -101,7 +101,7 @@ Visit https://www.timondev.com
                 <sl-input class="admin-change-input" id="change-links-facebook" placeholder="<%= CONFIG.LINKS.FACEBOOK %>"></sl-input>
                 <sl-button class="admin-change-submit" id="submit-links-facebook">Aktualisieren</sl-button>
             </div>
-        </section>
+        </section> -->
         <section>
             <h3 class="admin-change-title">WhatsApp Link</h3>
             <div class="admin-change-wrapper">
@@ -114,6 +114,48 @@ Visit https://www.timondev.com
             <div class="admin-change-wrapper">
                 <sl-input class="admin-change-input" id="change-password" placeholder="************"></sl-input>
                 <sl-button class="admin-change-submit-password" id="submit-password">Aktualisieren</sl-button>
+            </div>
+        </section>
+        <section>
+            <h3 class="admin-change-title">Text: Untertitel ganz oben</h3>
+            <div class="admin-change-wrapper">
+                <sl-input class="admin-change-input" id="change-text-hero" placeholder="<%- text.hero %>"></sl-input>
+                <sl-button class="admin-change-submit-text" id="submit-text-hero">Aktualisieren</sl-button>
+            </div>
+        </section>
+        <section>
+            <h3 class="admin-change-title">Text: Professionell</h3>
+            <div class="admin-change-wrapper">
+                <sl-input class="admin-change-input" id="change-text-Professionell" placeholder="<%- text.wave.Professionell %>"></sl-input>
+                <sl-button class="admin-change-submit-text" id="submit-text-Professionell">Aktualisieren</sl-button>
+            </div>
+        </section>
+        <section>
+            <h3 class="admin-change-title">Text: Vor Ort</h3>
+            <div class="admin-change-wrapper">
+                <sl-input class="admin-change-input" id="change-text-Vor-Ort" placeholder="<%- text.wave["Vor Ort"] %>"></sl-input>
+                <sl-button class="admin-change-submit-text" id="submit-text-Vor-Ort">Aktualisieren</sl-button>
+            </div>
+        </section>
+        <section>
+            <h3 class="admin-change-title">Text: Nachhaltig</h3>
+            <div class="admin-change-wrapper">
+                <sl-input class="admin-change-input" id="change-text-Nachhaltig" placeholder="<%- text.wave.Nachhaltig %>"></sl-input>
+                <sl-button class="admin-change-submit-text" id="submit-text-Nachhaltig">Aktualisieren</sl-button>
+            </div>
+        </section>
+        <section>
+            <h3 class="admin-change-title">Text: Mehr Erfahren</h3>
+            <div class="admin-change-wrapper">
+                <sl-input class="admin-change-input" id="change-text-more" placeholder="<%- text.more %>"></sl-input>
+                <sl-button class="admin-change-submit-text" id="submit-text-more">Aktualisieren</sl-button>
+            </div>
+        </section>
+        <section>
+            <h3 class="admin-change-title">Text: Anleitung zur Kontaktaufnahme</h3>
+            <div class="admin-change-wrapper">
+                <sl-input class="admin-change-input" id="change-text-contact" placeholder="<%- text.contact %>"></sl-input>
+                <sl-button class="admin-change-submit-text" id="submit-text-contact">Aktualisieren</sl-button>
             </div>
         </section>
         <h1 class="section-title">Kommentare</h1>
@@ -198,6 +240,7 @@ Visit https://www.timondev.com
         <div class="hidden devs">
             <div id="phone"><%= phone %></div>
             <div id="carousel-array"><%= JSON.stringify(compare) %></div>
+            <div id="text-obj"><%= JSON.stringify(text) %></div>
 
             <!-- This section is that main.js does not throw any errors -->
             <div class="info-video-play-icon"></div>
