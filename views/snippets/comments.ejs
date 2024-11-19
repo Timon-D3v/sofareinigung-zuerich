@@ -8,7 +8,7 @@
                         </div>
                     </div>
                     <div class="single-review">
-                        <p><%= review %></p>
+                        <p><%- review.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/(\d{10})(\d{1})/g, "$1<wbr>$2") %></p>
                     </div>
                     <div class="review-footer">
                         <div class="rating"><%

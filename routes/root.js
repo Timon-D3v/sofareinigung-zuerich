@@ -14,7 +14,9 @@ router.get("/", async (req, res) => {
     
     let COMMENTS = await getComments();
 
-    if (COMMENTS.length > 100) {
+    if (COMMENTS.length < 10) {
+        COMMENTS = [];
+    } else if (COMMENTS.length > 100) {
         COMMENTS = COMMENTS.filter((_, index) => index > COMMENTS.length - 101);
     }
 
@@ -24,7 +26,7 @@ router.get("/", async (req, res) => {
         origin: req.protocol + "://" + req.get("host"),
         title: CONFIG.PAGES.HOME.TITLE,
         description: CONFIG.PAGES.HOME.DESCRIPTION,
-        comments: [],
+        comments: COMMENTS,
         compare: JSON.parse(compare),
         text: JSON.parse(text)
     });
