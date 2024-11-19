@@ -14,17 +14,18 @@ export class ContactEmail {
      * @param {string} message - The message from the contact.
      * @param {Array} files - The files attached to the email.
      */
-    constructor(name, familyName, email, message, files) {
+    constructor(name, familyName, email, message, files, postalCode) {
         this.inputs = {
             name,
             familyName,
             email,
             message,
-            files
+            files,
+            postalCode
         };
 
         this.date = new Date().toLocaleDateString("en-GB", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" });
-        this.message_end = `\n\nGeschrieben von ${this.inputs.name} ${this.inputs.familyName} am ${this.date}.\nDu kannst ${this.inputs.name} unter ${this.inputs.email} erreichen.`;
+        this.message_end = `\n\nGeschrieben von ${this.inputs.name} ${this.inputs.familyName} am ${this.date}.\n${this.inputs.name} hat die Postleitzahl ${this.inputs.postalCode} und du kannst ihn/sie unter ${this.inputs.email} erreichen.`;
 
         this.template = {
             TEXT: `${CONFIG.TEMPLATES.EMAIL.CONTACT.TITLE}\n\n${this.inputs.message}\n\n${CONFIG.TEMPLATES.EMAIL.CONTACT.MESSAGE_END}\n\n${CONFIG.TEMPLATES.EMAIL.CONTACT.FOOTER}\n${CONFIG.TEMPLATES.EMAIL.CONTACT.FOOTER_2}`,
@@ -127,11 +128,11 @@ export class ContactEmail {
             CONFIG.EMAIL_PERSONAL,
             CONFIG.EMAIL,
             `${this.inputs.name} ${this.inputs.familyName}`,
-            CONFIG.TEMPLATES.EMAIL.TITLE + ` von ${this.inputs.name} ${this.inputs.familyName}`,
+            CONFIG.TEMPLATES.EMAIL.CONTACT.TITLE + ` von ${this.inputs.name} ${this.inputs.familyName}`,
             this.template.TEXT,
             this.template.HTML,
             this.inputs.files,
-            CONFIG.TEMPLATES.EMAIL.TITLE
+            CONFIG.TEMPLATES.EMAIL.CONTACT.TITLE
         );
     }
 }

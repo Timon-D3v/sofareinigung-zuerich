@@ -556,7 +556,6 @@ svg.divider.flipped {
     width: 100%;
     max-width: 60ch;
     text-wrap: balance;
-    text-align: justify;
     font-size: 1.2rem;
 }
 

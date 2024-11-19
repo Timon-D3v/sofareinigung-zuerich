@@ -267,12 +267,14 @@ async function submitContactForm(e) {
     const email = getElm("contact-email");
     const message = getElm("contact-message");
     const filesElement = getElm("contact-files").getQuery(".contact-input");
+    const postalCode = getElm("contact-postal-code");
     const files = [];
 
     if (name.valIsEmpty()) return customErrorField("Bitte gib deinen Vornamen ein.");
     if (familyName.valIsEmpty()) return customErrorField("Bitte gib deinen Nachnamen ein.");
     if (email.valIsEmpty()) return customErrorField("Bitte gib deine E-Mail-Adresse ein.");
     if (message.valIsEmpty()) return customErrorField("Bitte gib eine Nachricht ein.");
+    if (postalCode.valIsEmpty()) return customErrorField("Bitte gib deine Postleitzahl ein.");
 
     for (let i = 0; i < filesElement.length; i++) {
         const input = filesElement.get(i);
@@ -289,7 +291,8 @@ async function submitContactForm(e) {
         familyName: familyName.val(),
         email: email.val(),
         message: message.val(),
-        files
+        files,
+        postalCode: postalCode.val()
     });
     
     if (response.error !== "OK") return customErrorField("Das hat leider nicht geklappt. Bitte versuche es erneut.");

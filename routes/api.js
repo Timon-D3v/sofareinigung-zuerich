@@ -19,9 +19,9 @@ const commentsValidation = [];
 
 router.post("/contact", async (req, res) => {
     try {
-        const { name, familyName, email, message, files } = req.body;
+        const { name, familyName, email, message, files, postalCode } = req.body;
 
-        if (!name || !familyName || !email || !message || !files) return res.status(400).json({ error: "Bitte fülle alle Felder aus." });
+        if (!name || !familyName || !email || !message || !files || !postalCode) return res.status(400).json({ error: "Bitte fülle alle Felder aus." });
 
         if (!Array.isArray(files) || files.length === 0) return res.status(400).json({ error: "Bitte lade mindestens ein Bild hoch." });
 
@@ -35,7 +35,7 @@ router.post("/contact", async (req, res) => {
             Base64Content: file.base64.split(",")[1]
         }));
         
-        const response = await new ContactEmail(name, familyName, email, message, base64Array).send();
+        const response = await new ContactEmail(name, familyName, email, message, base64Array, postalCode).send();
 
         if (response.success) return res.status(200).json({ error: "OK" });
 
