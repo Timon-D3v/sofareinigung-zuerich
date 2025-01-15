@@ -50,7 +50,7 @@ export async function sendMail(to, from, name, subject, text, html, files = [], 
         timon.errorLog(error);
         return {
             success: false,
-            data: response
+            data: "Nachricht konnte nicht gesendet werden."
         };
     }
 }

@@ -30,6 +30,28 @@ Visit https://www.timondev.com
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/cdn/themes/light.min.css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/timonjs@2.0.5/dist/timon.min.js"></script>
     <script type="text/javascript" src="/js/login.js" defer></script>
+    <script type="text/javascript" src="/js/cookieConsent.js" defer></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            window.dataLayer.push(arguments);
+        }
+    
+        gtag("js", new Date());
+        gtag("config", "G-YS590ZYYMQ");
+        gtag("consent", "default", {
+            ad_storage: "denied",
+            analytics_storage: "denied",
+            personalization_storage: "denied",
+            functionality_storage: "granted",
+            security_storage: "granted",
+        });
+    
+        document.addEventListener("cookie_consent_updated", () => {
+            gtag("consent", "update", JSON.parse(localStorage.getItem("cookie_consent_mode")));
+        });
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=id=G-YS590ZYYMQ"></script>
     <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.17.1/cdn/components/icon/icon.js"></script>
     <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.17.1/cdn/components/alert/alert.js"></script>
     <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.17.1/cdn/components/input/input.js"></script>
@@ -57,5 +79,7 @@ Visit https://www.timondev.com
         </form>
     </div>
     <div id="alerts-graveyard"></div>
+    <%- include("./snippets/cookie.ejs") %>
+    <%- include("./snippets/privacy.ejs") %>
 </body>
 </html>

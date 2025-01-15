@@ -10,6 +10,8 @@ const contactForm = getElm("contact");
 const contactFile = getElm("contact-file");
 const commentsForm = getElm("comments");
 const commentsFile = getElm("comments-file");
+const privacyWrapper = getElm("privacy");
+const imprintWrapper = getElm("imprint");
 
 let commentsAnimationStart = null;
 let commentsAnimation1 = null;
@@ -96,9 +98,13 @@ getElm("contact-close").click(contactOut);
 getElm("comments-open").click(commentIn);
 getElm("comments-close").click(commentOut);
 getElm("comments-submit").click(submitCommentsForm);
+getElm("privacy-close").click(privacyOut);
+getElm("imprint-close").click(imprintOut);
 
 getQuery(".open-contact-form").click(contactIn);
 getQuery(".open-comment-form").click(commentIn);
+getQuery(".open-privacy").click(privacyIn);
+getQuery(".open-imprint").click(imprintIn);
 
 getQuery(".scroll-to-contact").click(() => scrollToQuery("#scrollTo___contact"));
 getQuery(".scroll-to-explore").click(() => scrollToQuery("#scrollTo___explore"));
@@ -237,6 +243,80 @@ function contactOut() {
     body.css({ overflow: "auto" });
 
     contactForm.removeClass("open");
+}
+
+function privacyIn() {
+    if (privacyWrapper.hasClass("open")) return;
+
+    transitionIn(() => gsap.fromTo("#privacy", {
+        opacity: 0,
+        y: -80,
+        display: "none"
+    }, {
+        opacity: 1,
+        y: 0,
+        display: "block",
+        duration: 0.5,
+        ease: "power2.inOut"
+    }));
+
+    body.css({ overflow: "hidden" });
+
+    privacyWrapper.addClass("open");
+}
+
+function privacyOut() {
+    if (!privacyWrapper.hasClass("open")) return;
+
+    gsap.to("#privacy", {
+        opacity: 0,
+        y: 80,
+        display: "none",
+        duration: 0.5,
+        ease: "power2.inOut",
+        onComplete: transitionOut
+    });
+
+    body.css({ overflow: "auto" });
+
+    privacyWrapper.removeClass("open");
+}
+
+function imprintIn() {
+    if (imprintWrapper.hasClass("open")) return;
+
+    transitionIn(() => gsap.fromTo("#imprint", {
+        opacity: 0,
+        y: -80,
+        display: "none"
+    }, {
+        opacity: 1,
+        y: 0,
+        display: "block",
+        duration: 0.5,
+        ease: "power2.inOut"
+    }));
+
+    body.css({ overflow: "hidden" });
+
+    imprintWrapper.addClass("open");
+}
+
+function imprintOut() {
+    if (!imprintWrapper.hasClass("open")) return;
+
+    gsap.to("#imprint", {
+        opacity: 0,
+        y: 80,
+        display: "none",
+        duration: 0.5,
+        ease: "power2.inOut",
+        onComplete: transitionOut
+    });
+
+    body.css({ overflow: "auto" });
+
+    imprintWrapper.removeClass("open");
 }
 
 function createContactFile(name, data) {

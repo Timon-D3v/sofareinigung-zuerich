@@ -743,7 +743,9 @@ svg.divider.flipped {
 }
 
 #contact,
-#comments {
+#comments,
+#privacy,
+#imprint {
     display: none;
     position: fixed;
     top: var(--header-height);
@@ -844,7 +846,9 @@ svg.divider.flipped {
 }
 
 #contact-close,
-#comments-close {
+#comments-close,
+#privacy-close,
+#imprint-close {
     --close-btn-size: calc(var(--header-height) / 2);
     position: absolute;
     top: 0;
@@ -853,7 +857,9 @@ svg.divider.flipped {
 }
 
 #contact-close > img,
-#comments-close > img {
+#comments-close > img,
+#privacy-close > img,
+#imprint-close > img {
     padding: calc(var(--close-btn-size) / 10);
     filter: invert(1);
 }
@@ -1004,6 +1010,124 @@ footer *::selection {
 .floating-reviews:has(.comments-replace-img)::before,
 .floating-reviews:has(.comments-replace-img)::after {
     height: 30%;
+}
+
+.cookie-wrapper {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    justify-content: flex-start;
+    gap: max(3vh, 1rem);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: max(3vh, 1rem);
+    z-index: 1000;
+    box-sizing: border-box;
+    pointer-events: none;
+}
+
+.cookie-card {
+    max-width: 320px;
+    border-width: 1px;
+    border-color: rgba(219, 234, 254, 1);
+    border-radius: 1rem;
+    background-color: rgba(255, 255, 255, 1);
+    padding: 1rem;
+    pointer-events: all;
+    box-shadow: 0 2px 5px var(--secondary-500);
+}
+
+.cookie-header {
+    display: flex;
+    align-items: center;
+    grid-gap: 1rem;
+    gap: 1rem;
+}
+
+.cookie-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: var(--primary-500);
+    padding: 0.5rem;
+    color: rgba(255, 255, 255, 1);
+}
+
+.cookie-icon svg {
+    height: 1rem;
+    width: 1rem;
+}
+
+.cookie-alert {
+    font-weight: 600;
+    color: rgba(107, 114, 128, 1);
+}
+
+.cookie-message {
+    margin-top: 0.5rem;
+    color: rgba(107, 114, 128, 1);
+}
+
+.cookie-actions {
+    margin-top: 1.5rem;
+}
+
+.cookie-actions a {
+    text-decoration: none;
+}
+
+.cookie-mark-as-read,
+.cookie-read {
+    display: inline-block;
+    border-radius: 0.5rem;
+    width: 100%;
+    padding: 0.75rem 1.25rem;
+    text-align: center;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.cookie-read {
+    background-color: var(--primary-500);
+    color: var(--text-50);
+}
+
+.cookie-read:hover {
+    background-color: var(--primary-600);
+}
+
+.cookie-read:active {
+    background-color: var(--primary-700);
+}
+
+.cookie-mark-as-read {
+    margin-top: 0.5rem;
+    background-color: rgba(249, 250, 251, 1);
+    color: rgba(107, 114, 128, 1);
+    transition: all .15s ease;
+}
+
+.cookie-mark-as-read:hover {
+    background-color: rgb(230, 231, 233);
+}
+
+.cookie-mark-as-read:active {
+    background-color: rgb(210, 211, 213);
+}
+
+.cookie-link {
+    color: var(--primary-500);
 }
 
 
