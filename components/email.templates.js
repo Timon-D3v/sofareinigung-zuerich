@@ -56,7 +56,9 @@ export class ContactEmail {
                           <p style="font-size:12px;line-height:18px;color:#8c8c8c;">
                             <big style="font:15px Arial,Helvetica,sans-serif;padding:10px;background:#ffffff;border:1px solid #e3e3e3;text-align:left;color:#555555;display:block;">
                               <b>${this.inputs.message.replace(/\n/g, "<br>")}</b>
-                            </big>${CONFIG.TEMPLATES.EMAIL.CONTACT.MESSAGE_END}
+                            </big>
+                            <br>
+                            ${CONFIG.TEMPLATES.EMAIL.CONTACT.MESSAGE_END}
                             <br>
                             ${this.message_end}
                           </p>
@@ -191,7 +193,9 @@ export class CommentsValidationEmail {
                         <p style="font-size:12px;line-height:18px;color:#8c8c8c;">
                           <big style="font:15px Arial,Helvetica,sans-serif;padding:10px;background:#ffffff;border:1px solid #e3e3e3;text-align:center;color:#555555;display:block;">
                             <b>${this.inputs.code}</b>
-                          </big>${CONFIG.TEMPLATES.EMAIL.COMMENTS.MESSAGE_HINT}
+                          </big>
+                          <br>
+                          ${CONFIG.TEMPLATES.EMAIL.COMMENTS.MESSAGE_HINT}
                         </p>
                       </div>
                     </td>
