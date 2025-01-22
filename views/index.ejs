@@ -156,7 +156,7 @@ Visit https://www.timondev.com
                 </div>
                 <div class="prefooter-write">
                     <h2 class="prefooter-title">Schreiben</h2>
-                    <button type="button" class="secondary-btn anim-scale delay-1 open-contact-form" title="Jetzt einen Termin finden">Kontaktformular</button>
+                    <button type="button" class="secondary-btn anim-scale delay-1 open-contact-form" title="Jetzt einen Termin finden">Kontakt</button>
                 </div>
             </div>
         </section>
@@ -179,7 +179,7 @@ Visit https://www.timondev.com
     </div>
     <form id="contact">
         <h1 class="main-title">Kontaktieren Sie mich!</h1>
-        <p class="contact-info-text"><%- text.contact %></p>
+        <p class="contact-info-text"><%- text.contact.replace(/\\n/gm, "<br>") %></p>
         <div class="contact-name-wrapper">
             <sl-input id="contact-name" class="contact-input" type="text" label="Vorname" autocomplete="given-name" required></sl-input>
             <sl-input id="contact-family-name" class="contact-input" type="text" label="Nachname" autocomplete="family-name" required></sl-input>
