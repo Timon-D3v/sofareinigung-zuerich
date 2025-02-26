@@ -103,7 +103,7 @@ router.post("/commentsConfirm", async (req, res) => {
 
         for (let i = 0; i < commentsValidation.length; i++) {
             if (commentsValidation[i].email === email && commentsValidation[i].code === code) {
-                const response = await uploadImage(commentsValidation[i].file, timon.randomString(16), "users");
+                const response = commentsValidation[i].file.startsWith("data:image") ? await uploadImage(commentsValidation[i].file, timon.randomString(16), "users") : null;
 
                 let url = "/img/user.svg";
 
