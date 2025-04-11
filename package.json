@@ -6,7 +6,12 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "docker:build": "docker build . -t sofareinigung-zuerich",
+    "docker:run": "docker run --rm --name sofareinigung-zuerich -p 8080:8080 --env-file ./docker.env sofareinigung-zuerich",
+    "docker:stop": "docker stop sofareinigung-zuerich",
+    "docker:tag": "docker tag sofareinigung-zuerich timond3v/sofareinigung-zuerich",
+    "docker:push": "docker push timond3v/sofareinigung-zuerich"
   },
   "repository": {
     "type": "git",

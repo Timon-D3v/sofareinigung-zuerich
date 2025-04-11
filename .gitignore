@@ -139,3 +139,4 @@ Abrechnung.txt
 .hintrc
 public/img/test/
 database/backups/
+*.env

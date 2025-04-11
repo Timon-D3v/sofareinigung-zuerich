@@ -26,6 +26,7 @@ import ROUTES___ADMIN from "./routes/admin.js";
 const { 
     ENV,
     PORT,
+    HOST,
     SESSION_SECRET_KEY
 } = CONFIG;
 
@@ -80,4 +81,4 @@ app.post("*", (req, res) => res.status(404).end());
 
 
 // Listen
-app.listen(PORT, functions.listening);
+app.listen(PORT, HOST, functions.listening);
