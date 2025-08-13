@@ -1,6 +1,6 @@
 {
   "name": "sofareinigung-zuerich",
-  "version": "1.0.1",
+  "version": "1.1.1",
   "type": "module",
   "description": "Dieses Repo enthält den Code für die Webseite sofareinigung-zuerich.ch",
   "main": "app.js",
