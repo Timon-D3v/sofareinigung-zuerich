@@ -75,8 +75,8 @@ app.use("/api", ROUTES___API);
 app.use("/auth", notAuth, ROUTES___AUTH);
 app.use("/admin", auth, ROUTES___ADMIN);
 
-app.get("*", (req, res) => res.status(404).redirect("/"));
-app.post("*", (req, res) => res.status(404).end());
+app.get("*splat", (req, res) => res.status(404).redirect("/"));
+app.post("*splat", (req, res) => res.status(404).end());
 
 
 
