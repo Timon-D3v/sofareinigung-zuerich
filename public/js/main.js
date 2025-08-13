@@ -353,6 +353,7 @@ async function submitContactForm(e) {
     if (name.valIsEmpty()) return customErrorField("Bitte gib deinen Vornamen ein.");
     if (familyName.valIsEmpty()) return customErrorField("Bitte gib deinen Nachnamen ein.");
     if (email.valIsEmpty()) return customErrorField("Bitte gib deine E-Mail-Adresse ein.");
+    if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,10}$/.test(email.val())) return customErrorField("Bitte gib eine gültige E-Mail-Adresse ein.");
     if (message.valIsEmpty()) return customErrorField("Bitte gib eine Nachricht ein.");
     if (postalCode.valIsEmpty()) return customErrorField("Bitte gib deine Postleitzahl ein.");
 
@@ -529,7 +530,7 @@ function customField(message, variant, title, icon_name) {
     div.variant = variant;
     div.closable = true;
     div.open = true;
-    div.duration = 5000;
+    div.duration = 50000;
 
     const icon = createElm("sl-icon");
     icon.name = icon_name;

@@ -892,6 +892,10 @@ sl-alert::part(base) {
     z-index: 900;
 }
 
+sl-alert::part(icon) {
+    font-size: 32px;
+}
+
 footer *::selection {
     background-color: rgba(143, 156, 163, 0.5); /* secondary-400 */
 }

@@ -25,7 +25,7 @@ export class ContactEmail {
         };
 
         this.date = new Date().toLocaleDateString("en-GB", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" });
-        this.message_end = `\n\nGeschrieben von ${this.inputs.name} ${this.inputs.familyName} am ${this.date}.\n${this.inputs.name} hat die Postleitzahl ${this.inputs.postalCode} und du kannst ihn/sie unter ${this.inputs.email} erreichen.`;
+        this.message_end = `\n\nGeschrieben von ${this.inputs.name} ${this.inputs.familyName} am ${this.date}.\n${this.inputs.name} hat die Postleitzahl ${this.inputs.postalCode} und du kannst ihn/sie unter <a href="mailto:${this.inputs.email}">${this.inputs.email}</a> erreichen.`;
 
         this.template = {
             TEXT: `${CONFIG.TEMPLATES.EMAIL.CONTACT.TITLE}\n\n${this.inputs.message}\n\n${CONFIG.TEMPLATES.EMAIL.CONTACT.MESSAGE_END}\n\n${CONFIG.TEMPLATES.EMAIL.CONTACT.FOOTER}\n${CONFIG.TEMPLATES.EMAIL.CONTACT.FOOTER_2}`,
