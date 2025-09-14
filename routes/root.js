@@ -11,6 +11,7 @@ const router = express.Router();
 router.get("/", async (req, res) => {
     const compare = await get("before_after");
     const text = await get("text");
+    const infoBanner = await get("info_banner");
     
     let COMMENTS = await getComments();
 
@@ -28,7 +29,8 @@ router.get("/", async (req, res) => {
         description: CONFIG.PAGES.HOME.DESCRIPTION,
         comments: COMMENTS,
         compare: JSON.parse(compare),
-        text: JSON.parse(text)
+        text: JSON.parse(text),
+        infoBanner: JSON.parse(infoBanner)
     });
 });
 

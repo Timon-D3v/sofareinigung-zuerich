@@ -13,6 +13,11 @@ section:nth-of-type(even) {
     gap: var(--padding-side);
 }
 
+.admin-change-wrapper-info-banner {
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .admin-change-input {
     width: 100%;
 }

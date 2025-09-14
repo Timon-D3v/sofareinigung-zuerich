@@ -118,6 +118,36 @@ getQuery(".comment-delete-btn").forEach(button => {
     getElm(`submit-text-${type}`).click(() => updateText(type.replace(/-/g, " ")));
 });
 
+getElm("submit-info-banner").click(updateInfoBanner);
+
+async function updateInfoBanner() {
+    const titleInput = getElm("change-info-banner-title");
+    const textInput = getElm("change-info-banner-text");
+
+    const really = await confirm(`Willst du wirklich den Titel von "${titleInput.placeholder}" zu "${titleInput.val()}" und den Text von "${textInput.placeholder}" zu "${textInput.val()}" ändern?`);
+
+    if (!really) return;
+
+    // Don't check if the value is empty since an empty string is needed to clear the banner
+
+    const response = await post("/api/changeDB", {
+        name: "info_banner",
+        value: JSON.stringify({
+            title: titleInput.val(),
+            text: textInput.val()
+        })
+    })
+
+    if (!response?.valid) return alert("Etwas hat nicht geklappt. Bitte versuche es später erneut.");
+
+    titleInput.placeholder = titleInput.val();
+    titleInput.val("");
+    textInput.placeholder = textInput.val();
+    textInput.val("");
+
+    alert("Erfolgreich geändert.");
+}
+
 async function updateInfos(type) {
     const input = getElm(`change-${type}`);
 

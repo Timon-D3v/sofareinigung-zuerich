@@ -1,0 +1,83 @@
+<div class="info-banner-wrapper">
+    <div class="info-banner">
+        <button class="info-banner-close-button close-btn">
+            <img src="/img/close.svg" alt="Schliessen">
+        </button>
+
+        <h1 class="main-title info-banner-title">⚠️ <wbr><%= title %><wbr> ⚠️</h1>
+        <p class="info-banner-text"><%= text %></p>
+    </div>
+
+    <script defer>
+        function closeInfoBanner() {
+            gsap.fromTo(".info-banner-wrapper", {
+                opacity: "100%",
+            }, {
+                opacity: "0%",
+                duration: 1,
+                ease: "power3.out",
+                onComplete: () => getQuery(".info-banner-wrapper").get(0).addClass("hidden")
+            });
+        }
+
+        getQuery(".info-banner-close-button").click(closeInfoBanner);
+        getQuery(".info-banner-wrapper").click(closeInfoBanner);
+        getQuery(".info-banner").click((event) => {
+            event.stopPropagation();
+        })
+    </script>
+
+    <style>
+        .info-banner-wrapper {
+            position: fixed;
+            z-index: 10000;
+            background-color: rgba(12, 14, 12, 50%); /* == var(--background-950) */
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            display: grid;
+            place-items: center;
+        }
+
+        .info-banner {
+            max-width: 80%;
+            max-height: 80%;
+            min-width: 30%;
+            min-height: 30%;
+            background-color: var(--background-50);
+            border-radius: 2rem;
+            padding: 2rem;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .info-banner-close-button {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            aspect-ratio: 1 / 1;
+            width: 3rem;
+            height: 3rem;
+        }
+
+        .info-banner-close-button > img {
+            width: 100%;
+            height: 100%;
+            aspect-ratio: 1 / 1;
+        }
+
+        .info-banner-title {
+            font-size: 3.5rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-banner-text {
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            text-wrap: balance;
+            text-align: center;
+        }
+    </style>
+</div>

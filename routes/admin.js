@@ -12,6 +12,7 @@ router.get("/", async (req, res) => {
     const comments = await getComments();
     const text = await get("text");
     const compare = await get("before_after");
+    const infoBanner = await get("info_banner");
 
     res.render("admin.ejs", {
         CONFIG,
@@ -21,7 +22,8 @@ router.get("/", async (req, res) => {
         description: CONFIG.PAGES.ADMIN.DESCRIPTION,
         comments,
         compare: JSON.parse(compare),
-        text: JSON.parse(text)
+        text: JSON.parse(text),
+        infoBanner: JSON.parse(infoBanner)
     });
 });
 

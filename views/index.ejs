@@ -225,6 +225,9 @@ Visit https://www.timondev.com
     <div id="alerts-graveyard"></div>
     <%- include("./snippets/cookie.ejs") %>
     <%- include("./snippets/privacy.ejs") %>
+    <% if (infoBanner.title !== "" && infoBanner.text !== "") { %>
+        <%- include("./snippets/info-banner.ejs", infoBanner) %>
+    <% } %>
     <%- include("./snippets/footer.ejs", {
         phone,
         CONFIG
