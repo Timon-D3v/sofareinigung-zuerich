@@ -1,9 +1,11 @@
-FROM node:22.16.0-alpine3.20
+FROM node:24.14.0-alpine3.23
 
-WORKDIR /build
+WORKDIR /sofareinigung-zuerich
 
 COPY package*.json .
 COPY . .
+
+RUN mkdir cert
 
 RUN npm install --omit=dev
 RUN npm cache clean --force

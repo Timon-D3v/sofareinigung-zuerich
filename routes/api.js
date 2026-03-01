@@ -9,6 +9,7 @@ import { getRandomInt } from "../components/functions.js";
 import { saveComment } from "../components/comments.js";
 import update from "../components/update.database.js";
 import deleteId from "../components/delete.database.js";
+import get from "../components/get.database.js";
 
 
 
@@ -127,9 +128,9 @@ router.post("/commentsConfirm", async (req, res) => {
     }
 });
 
-router.get("/phone", (req, res) => {
+router.get("/phone", async (req, res) => {
     try {
-        res.status(200).send(CONFIG.PHONE);
+        res.status(200).send(await get("phone"));
     } catch (error) {
         timon.errorLog(error);
         res.status(500).send("Etwas hat nicht geklappt. Bitte versuche es später erneut.");

@@ -1,5 +1,5 @@
 // Imports
-import crypto from "crypto";
+import crypto from "node:crypto";
 import CONFIG from "../config.js";
 
 
@@ -8,7 +8,14 @@ import CONFIG from "../config.js";
  * Logs a message indicating that the server is running.
  */
 export function listening() {
-    console.log(`\x1b[34m%s\x1b[0m`, `Server is running in ${CONFIG.ENV} mode on port ${CONFIG.PORT}`);
+    console.log(`\x1b[34m%s\x1b[0m`, `Server is running in ${CONFIG.ENV} mode on port ${CONFIG.PORT} with host ${CONFIG.HOST}`);
+}
+
+/**
+ * Logs a message indicating that the HTTPS server is running.
+ */
+export function httpsListening() {
+    console.log(`\x1b[34m%s\x1b[0m`, `HTTPS Server is running in ${CONFIG.ENV} mode on port ${CONFIG.HTTPS_PORT} host ${CONFIG.HOST}`);
 }
 
 /**
@@ -34,5 +41,6 @@ export function getRandomInt(min, max) {
 // Exports
 export default {
     listening,
+    httpsListening,
     getRandomInt
 }

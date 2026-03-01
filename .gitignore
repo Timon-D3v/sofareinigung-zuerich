@@ -140,3 +140,4 @@ Abrechnung.txt
 public/img/test/
 database/backups/
 *.env
+cert/

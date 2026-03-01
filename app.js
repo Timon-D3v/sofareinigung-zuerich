@@ -1,8 +1,9 @@
 // Import Modules
 import session from "express-session";
 import bodyParser from "body-parser";
+import https from 'node:https';
 import express from "express";
-import timon from "timonjs";
+import fs from 'node:fs';
 import cors from "cors";
 
 // Import Components
@@ -23,11 +24,13 @@ import ROUTES___ADMIN from "./routes/admin.js";
 
 
 // Constants
-const { 
-    ENV,
+const {
     PORT,
     HOST,
-    SESSION_SECRET_KEY
+    SESSION_SECRET_KEY,
+    HTTPS_ACTIVE,
+    HTTPS_PORT,
+    HTTPS_CERT_PASSPHRASE
 } = CONFIG;
 
 
@@ -82,3 +85,15 @@ app.post("*splat", (req, res) => res.status(404).end());
 
 // Listen
 app.listen(PORT, HOST, functions.listening);
+
+if (HTTPS_ACTIVE) {
+    const httpsOptions = {
+        key: fs.readFileSync('./cert/key.pem'),
+        cert: fs.readFileSync('./cert/cert.pem'),
+        passphrase: HTTPS_CERT_PASSPHRASE
+    };
+
+    const httpsServer = https.createServer(httpsOptions, app);
+
+    httpsServer.listen(HTTPS_PORT, HOST, functions.httpsListening)
+}
