@@ -19,3 +19,4 @@ database/backups/
 .gitignore
 LICENSE
 README.md
+cert/

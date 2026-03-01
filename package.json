@@ -1,6 +1,6 @@
 {
   "name": "sofareinigung-zuerich",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "type": "module",
   "description": "Dieses Repo enthält den Code für die Webseite sofareinigung-zuerich.ch",
   "main": "app.js",
@@ -11,7 +11,8 @@
     "docker:run": "docker run --rm --name sofareinigung-zuerich -p 8080:8080 --env-file ./docker.env sofareinigung-zuerich",
     "docker:stop": "docker stop sofareinigung-zuerich",
     "docker:tag": "docker tag sofareinigung-zuerich timond3v/sofareinigung-zuerich",
-    "docker:push": "docker push timond3v/sofareinigung-zuerich"
+    "docker:push": "docker push timond3v/sofareinigung-zuerich",
+    "docker:buildx": "docker buildx build --platform linux/amd64,linux/arm64 . -t sofareinigung-zuerich"
   },
   "repository": {
     "type": "git",

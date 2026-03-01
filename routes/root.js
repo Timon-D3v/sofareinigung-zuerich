@@ -11,8 +11,7 @@ const router = express.Router();
 router.get("/", async (req, res) => {
     const compare = await get("before_after");
     const text = await get("text");
-    // const infoBanner = await get("info_banner");
-    const infoBanner = JSON.stringify({ title: "ACBaidjawidjwaiedjaidjwaidjawidjwaiedjaidjw", text: "aidjawidjwaiedjaidjw"})
+    const infoBanner = await get("info_banner");
     
     let COMMENTS = await getComments();
 
