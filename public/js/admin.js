@@ -1,5 +1,5 @@
 const carouselArray = getElm("carousel-array");
-let currentSlide= {
+let currentSlide = {
     index: 0,
     slide: document.querySelector(".carousel-item")
 };
@@ -56,24 +56,33 @@ getElm("carousel-delete").click(async () => {
 getElm("carousel-add").on("change", async () => {
     const input = getElm("carousel-add");
 
-    if (input.files.length !== 2) return alert("Bitte lade genau zwei Bilder hoch.");
+    if (input?.files?.length !== 2) return alert("Bitte lade genau zwei Bilder hoch.");
+
+    const formData = new FormData();
+
+    formData.append("files", input.files[0]);
+    formData.append("files", input.files[1]);
+
+    const response = await fetch("/api/uploadCarousel", {
+        method: "POST",
+        body: formData
+    })
+
+    const responseData = await response.json();
+
+    if (!responseData?.success) return alert("Etwas hat nicht geklappt. Bitte versuche es später erneut.");
+
+    alert("Erfolgreich hinzugefügt.");
+
+    // Update carousel array and add new slide to DOM
 
     const array = JSON.parse(carouselArray.text());
 
-    array.push([
-        await toBase64(input.files[1]),
-        await toBase64(input.files[0])
-    ]);
+    if (responseData.urls?.length !== 2) return alert("Etwas hat nicht geklappt. Bitte versuche es später erneut.");
 
-    const response = await post("/api/uploadCarousel", {
-        array
-    });
-
-    if (!response?.valid) return alert("Etwas hat nicht geklappt. Bitte versuche es später erneut.");
+    array.push(responseData.urls);
 
     carouselArray.text(JSON.stringify(array));
-
-    alert("Erfolgreich hinzugefügt.");
 
     const wrapper = createElm("sl-carousel-item");
     wrapper.classList.add("carousel-item");

@@ -2,7 +2,8 @@ import express from "express";
 import timon, { errorLog } from "timonjs";
 import CONFIG from "../config.js";
 import auth from "../components/auth.js";
-import uploadImage from "../components/imagekit.js";
+import multerInstance from "../components/multer.js";
+import { delivApiUpload } from "delivapi-client";
 import updatePassword from "../components/password.update.auth.js";
 import { ContactEmail, CommentsValidationEmail } from "../components/email.templates.js";
 import { getRandomInt } from "../components/functions.js";
@@ -48,9 +49,10 @@ router.post("/contact", async (req, res) => {
     }
 });
 
-router.post("/comments", async (req, res) => {    
+router.post("/comments", multerInstance.single("file"), async (req, res) => {    
     try {
-        const { name, familyName, email, message, file, rating } = req.body;
+        const file = req?.file
+        const { name, familyName, email, message, rating } = req.body;
 
         if (!name || !familyName || !email || !message || !file || !rating) return res.status(400).json({ error: "Bitte fülle alle Felder aus." });
 
@@ -81,6 +83,7 @@ router.post("/comments", async (req, res) => {
                 if (commentsValidation[i].email === email) {
                     commentsValidation.splice(i, 1);
                     req.session.commentsValidation = null;
+                    return;
                 }
             }
         }, 1800000 /* 30min */);
@@ -104,19 +107,28 @@ router.post("/commentsConfirm", async (req, res) => {
 
         for (let i = 0; i < commentsValidation.length; i++) {
             if (commentsValidation[i].email === email && commentsValidation[i].code === code) {
-                const response = commentsValidation[i].file.startsWith("data:image") ? await uploadImage(commentsValidation[i].file, timon.randomString(16), "users") : null;
+                let result = false;
 
-                let url = "/img/user.svg";
+                if (typeof commentsValidation[i].file === "string") {
+                    result = saveComment(commentsValidation[i], "/img/user.svg");
+                } else {
+                    const response = await delivApiUpload(commentsValidation[i].file.buffer)
 
-                if (response === null) timon.warnLog("Image upload failed.");
-                else url = response.url;
+                    result = !response.error
 
-                const result = saveComment(commentsValidation[i], url);
+                    if (!response.error) {
+                        result = saveComment(commentsValidation[i], response.url);
+                    } else {
+                        timon.warnLog("Image upload failed.");
+                        result = saveComment(commentsValidation[i], "/img/user.svg");
+                    }
+                }
 
                 if (!result) return res.status(500).json({ error: "Der Code war richtig, aber etwas hat bei uns nicht geklappt. Bitte versuche es später erneut." });
 
                 commentsValidation.splice(i, 1);
                 req.session.commentsValidation = null;
+
                 return res.status(200).json({ error: "OK" });
             }
         }
@@ -206,35 +218,38 @@ router.post("/deleteComment", auth, async (req, res) => {
     }
 });
 
-router.post("/uploadCarousel", auth, async (req, res) => {
+router.post("/uploadCarousel", auth, multerInstance.array("files", 2), async (req, res) => {
     try {
-        const { array } = req.body;
+        const filesArray = req.files;
 
-        if (!array || !Array.isArray(array)) throw new Error("Please fill out all fields.");
+        if (!filesArray || !Array.isArray(filesArray)) throw new Error("Please fill out all fields.");
 
-        const i = array.length - 1;
+        const beforeImageResponse = await delivApiUpload(filesArray[0].buffer);
+        const afterImageResponse = await delivApiUpload(filesArray[1].buffer);
 
-        const obj1 = await uploadImage(array[i][0], "carousel_file", "/carousel/");
-        const obj2 = await uploadImage(array[i][1], "carousel_file", "/carousel/");
+        if (beforeImageResponse.error || afterImageResponse.error) throw new Error("An error occurred while uploading the images.");
 
-        if (obj1 === null || obj2 === null) throw new Error("An error occurred while uploading the carousel.");
+        const carouselItem = [beforeImageResponse.url, afterImageResponse.url];
 
-        array[i][0] = obj1.url;
-        array[i][1] = obj2.url;
+        const currentCarousel = JSON.parse(await get("before_after"));
 
-        const valid = await update("before_after", JSON.stringify(array));
+        currentCarousel.push(carouselItem);
 
-        if (!valid) throw new Error("An error occurred while uploading the carousel.");
+        const success = await update("before_after", JSON.stringify(currentCarousel));
+
+        if (!success) throw new Error("An error occurred while uploading the carousel.");
 
         res.json({
-            valid,
-            message: "Carousel uploaded successfully."
+            success,
+            message: "Carousel uploaded successfully.",
+            urls: carouselItem
         });
     } catch (error) {
         timon.errorLog(error);
         res.status(500).json({
-            valid: false,
-            message: "An error occurred while uploading the carousel."
+            success: false,
+            message: "An error occurred while uploading the carousel.",
+            urls: null
         });
     }
 });

@@ -16,7 +16,7 @@ export default async function verify(req, res, next) {
         password: await get("password")
     }
 
-    if (!data) {
+    if (!data.username || !data.password) {
         return res.status(500).json({
             success: false,
             message: "Internal Server Error"

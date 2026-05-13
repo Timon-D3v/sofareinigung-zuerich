@@ -42,13 +42,13 @@ app.set("view engine", "ejs");
 
 app.use(express.static("public"));
 
-app.use(bodyParser.json({
-    limit: "10gb",
+app.use(express.json({
+    limit: "1gb",
     extended: true
 }));
 
-app.use(bodyParser.urlencoded({
-    limit: "10gb",
+app.use(express.urlencoded({
+    limit: "1gb",
     extended: true
 }));
 
@@ -61,10 +61,6 @@ app.use(session({
         maxAge: 432000000
     }
 }));
-
-app.use(bodyParser.urlencoded({extended: true}));
-
-app.use(bodyParser.json());
 
 app.use(cors());
 

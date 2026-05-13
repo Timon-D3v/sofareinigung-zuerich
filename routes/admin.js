@@ -1,5 +1,5 @@
 import express from "express";
-import CONFIG from "../config.js";
+import { CONFIG, updateConfig } from "../config.js";
 import get from "../components/get.database.js";
 import { getComments } from "../components/comments.js";
 
@@ -9,10 +9,9 @@ import { getComments } from "../components/comments.js";
 const router = express.Router();
 
 router.get("/", async (req, res) => {
+    await updateConfig();
+
     const comments = await getComments();
-    const text = await get("text");
-    const compare = await get("before_after");
-    const infoBanner = await get("info_banner");
 
     res.render("admin.ejs", {
         CONFIG,
@@ -21,9 +20,9 @@ router.get("/", async (req, res) => {
         title: CONFIG.PAGES.ADMIN.TITLE,
         description: CONFIG.PAGES.ADMIN.DESCRIPTION,
         comments,
-        compare: JSON.parse(compare),
-        text: JSON.parse(text),
-        infoBanner: JSON.parse(infoBanner)
+        compare: typeof CONFIG.COMPARE === "string" ? JSON.parse(CONFIG.COMPARE) : CONFIG.COMPARE,
+        text: typeof CONFIG.TEXT === "string" ? JSON.parse(CONFIG.TEXT) : CONFIG.TEXT,
+        infoBanner: typeof CONFIG.INFO_BANNER === "string" ? JSON.parse(CONFIG.INFO_BANNER) : CONFIG.INFO_BANNER
     });
 });
 

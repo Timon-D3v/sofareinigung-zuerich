@@ -448,26 +448,33 @@ async function submitCommentsForm(e) {
     const familyName = getElm("comments-family-name");
     const email = getElm("comments-email");
     const message = getElm("comments-message");
-    const file = getElm("comments-files").getQuery(".comments-input").get(0);
-    let url = "/img/logo.jpg";
+    const file = getElm("comments-file");
+    let defaultUrlOrFileBlob = "/img/logo.jpg";
 
     if (name.valIsEmpty()) return customErrorField("Bitte gib deinen Vornamen ein.");
     if (familyName.valIsEmpty()) return customErrorField("Bitte gib deinen Nachnamen ein.");
     if (email.valIsEmpty()) return customErrorField("Bitte gib deine E-Mail-Adresse ein.");
     if (message.valIsEmpty()) return customErrorField("Bitte gib eine Nachricht ein.");
 
-    if (file) url = file.data("data-base64");
+    if (file?.files?.length > 0) defaultUrlOrFileBlob = file.files[0];
 
-    const response = await post("/api/comments", {
-        name: name.val(),
-        familyName: familyName.val(),
-        email: email.val(),
-        message: message.val(),
-        rating: getElm("comments-rating").val(),
-        file: url
-    });
+    const formData = new FormData();
+
+    formData.append("name", name.val());
+    formData.append("familyName", familyName.val());
+    formData.append("email", email.val());
+    formData.append("message", message.val());
+    formData.append("rating", getElm("comments-rating").val());
+    formData.append("file", defaultUrlOrFileBlob);
+
+    const response = await fetch("/api/comments", {
+        method: "POST",
+        body: formData
+    })
+
+    const responseData = await response.json();
     
-    if (response.error !== "OK") return customErrorField("Das hat leider nicht geklappt. Bitte versuche es erneut.");
+    if (responseData.error !== "OK") return customErrorField("Das hat leider nicht geklappt. Bitte versuche es erneut.");
 
     validateCommentsEmail();
 }

@@ -1,4 +1,4 @@
-import CONFIG from "../config.js";
+import { CONFIG, updateConfig } from "../config.js";
 import express from "express";
 import { getComments } from "../components/comments.js";
 import get from "../components/get.database.js";
@@ -9,16 +9,14 @@ import get from "../components/get.database.js";
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-    const compare = await get("before_after");
-    const text = await get("text");
-    const infoBanner = await get("info_banner");
-    
-    let COMMENTS = await getComments();
+    await updateConfig();
 
-    if (COMMENTS.length < 10) {
-        COMMENTS = [];
-    } else if (COMMENTS.length > 100) {
-        COMMENTS = COMMENTS.filter((_, index) => index > COMMENTS.length - 101);
+    let comments = await getComments();
+
+    if (comments.length < 10) {
+        comments = [];
+    } else if (comments.length > 100) {
+        comments = comments.filter((_, index) => index > comments.length - 101);
     }
 
     res.render("index.ejs", {
@@ -27,10 +25,10 @@ router.get("/", async (req, res) => {
         origin: req.protocol + "://" + req.get("host"),
         title: CONFIG.PAGES.HOME.TITLE,
         description: CONFIG.PAGES.HOME.DESCRIPTION,
-        comments: COMMENTS,
-        compare: JSON.parse(compare),
-        text: JSON.parse(text),
-        infoBanner: JSON.parse(infoBanner)
+        comments,
+        compare: typeof CONFIG.COMPARE === "string" ? JSON.parse(CONFIG.COMPARE) : CONFIG.COMPARE,
+        text: typeof CONFIG.TEXT === "string" ? JSON.parse(CONFIG.TEXT) : CONFIG.TEXT,
+        infoBanner: typeof CONFIG.INFO_BANNER === "string" ? JSON.parse(CONFIG.INFO_BANNER) : CONFIG.INFO_BANNER
     });
 });
 

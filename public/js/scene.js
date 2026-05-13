@@ -10,13 +10,13 @@ async function init() {
     const { default: gsap } = await import("gsap");
     const THREE = await import("three");
     const { GLTFLoader } = await import("three/examples/jsm/loaders/GLTFLoader.js");
-    const { RGBELoader } = await import("three/examples/jsm/loaders/RGBELoader.js");
+    const { HDRLoader } = await import("three/examples/jsm/loaders/HDRLoader.js");
     const canvas = getElm("scene");
     const scene = new THREE.Scene();
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
     const camera = new THREE.PerspectiveCamera(70, canvas.x() / canvas.y(), 0.1, 1000);
     const modelLoader = new GLTFLoader();
-    const envLoader = new RGBELoader();
+    const envLoader = new HDRLoader();
     const pi = Math.PI;
     const angle = pi / 6;
     const pi2 = pi * 2;

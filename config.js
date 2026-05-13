@@ -6,7 +6,7 @@ import get from "./components/get.database.js";
 dotenv.config();
 
 // Export the constants
-export default {
+export const CONFIG = {
     NAME: "Sofareinigung Zürich",
     NAME_HTML: "Sofareinigung<br>Zürich",
     LOGO_PATH: "/img/logo.ico",
@@ -22,6 +22,9 @@ export default {
     EMAIL: await get("email"),
     EMAIL_PERSONAL: await get("email_personal"),
     PHONE: await get("phone"),
+    TEXT: await get("text"),
+    COMPARE: await get("before_after"),
+    INFO_BANNER: await get("info_banner"),
     LINKS: {
         INSTAGRAM: await get("link_instagram"),
         FACEBOOK: await get("link_facebook"),
@@ -38,11 +41,6 @@ export default {
     MAILJET: {
         PUBLIC_KEY: process.env.MAILJET_PUBLIC_KEY,
         PRIVATE_KEY: process.env.MAILJET_PRIVATE_KEY
-    },
-    IMAGEKIT: {
-        PUBLIC_KEY: process.env.IMAGEKIT_PUBLIC_KEY,
-        PRIVATE_KEY: process.env.IMAGEKIT_PRIVATE_KEY,
-        URL_ENDPOINT: "https://ik.imagekit.io/sofareinigungzuerich/"
     },
     PAGES: {
         HOME: {
@@ -62,23 +60,23 @@ export default {
         EMAIL: {
             GLOBAL: {
                 COLOR: "#2046df",
-                COPY: `&copy; 2024 Sofareinigung Zürich | info@sofareinigung-zuerich.ch`,
+                COPY: `&copy; ${new Date().getFullYear()} Sofareinigung Zürich | info@sofareinigung-zuerich.ch`,
                 IMG: {
                     LOGO: {
                         ALT: "Sofareinigung Zürich Logo",
-                        SRC: "https://ik.imagekit.io/sofareinigungzuerich/email/footer/logo.png"
+                        SRC: "https://sofareinigung-zuerich.ch/img/email/logo.png"
                     },
                     INSTAGRAM: {
                         ALT: "Instagram Logo",
-                        SRC: "https://ik.imagekit.io/sofareinigungzuerich/email/footer/instagram.png"
+                        SRC: "https://sofareinigung-zuerich.ch/img/email/instagram.png"
                     },
                     FACEBOOK: {
                         ALT: "Facebook Logo",
-                        SRC: "https://ik.imagekit.io/sofareinigungzuerich/email/footer/facebook.png"
+                        SRC: "https://sofareinigung-zuerich.ch/img/email/facebook.png"
                     },
                     WHATSAPP: {
                         ALT: "WhatsApp Logo",
-                        SRC: "https://ik.imagekit.io/sofareinigungzuerich/email/footer/whatsapp.png"
+                        SRC: "https://sofareinigung-zuerich.ch/img/email/whatsapp.png"
                     }
                 }
             },
@@ -96,3 +94,17 @@ export default {
         }
     }
 };
+
+export async function updateConfig() {
+    CONFIG.EMAIL = await get("email");
+    CONFIG.EMAIL_PERSONAL = await get("email_personal");
+    CONFIG.PHONE = await get("phone");
+    CONFIG.TEXT = await get("text");
+    CONFIG.COMPARE = await get("before_after");
+    CONFIG.INFO_BANNER = await get("info_banner");
+    CONFIG.LINKS.INSTAGRAM = await get("link_instagram");
+    CONFIG.LINKS.FACEBOOK = await get("link_facebook");
+    CONFIG.LINKS.WHATSAPP = await get("link_whatsapp");
+}
+
+export default CONFIG;

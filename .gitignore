@@ -141,3 +141,5 @@ public/img/test/
 database/backups/
 *.env
 cert/
+dev/delivapi
+dev/mysql
